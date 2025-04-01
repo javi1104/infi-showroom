@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en-EN">
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GMS</title>
+    <link rel="icon" type="image/x-icon" href="gms/assets/img/favicon.ico">
+    <!-- styles -->
+    <link rel="stylesheet" href="gms/assets/styles/main.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- owl -->
+    <link rel="stylesheet" href="gms/assets/vendor/owl.carousel.min.css">
+    <link rel="stylesheet" href="gms/assets/vendor/owl.theme.default.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VY0YPFGJMF"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-VY0YPFGJMF');
+    </script>
+</head>
+
+<body>
+    <style type="text/css">
+        .modal-dialog {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-content {
+            height: auto;
+            min-height: 100%;
+            border-radius: 0;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe,
+        .video-container object,
+        .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <div id="app">
+        <div class="container-fluid p-lg-4 m-0 lab-wrapper">
+
+              
+ <nav class="p-2 p-lg-4 sticky-top">
+    <div class="nav-logo"><a href="index-2.html">GMS <img src="gms/assets/img/plus.svg" alt="" height="50px"
+                                                       class="ps-2 pb-1"></a></div>
+    <div class="flip-card-content">
+        <div class="flip-card-side-a" onclick="openNav()">
+            MENU
+        </div>
+        <div class="flip-card-side-b" onclick="openNav()">
+            MENU
+        </div>
+    </div>
+</nav>
+
+<!--  OVERLAY MENU -->
+<div id="myNav" class="overlay">
+    <div class="container-fluid p-0 m-0">
+        <div class="overlay-content">
+            <div class="row">
+                <div class="col-12 col-lg-9 "></div>
+                <div class="d-none d-lg-block col-12 col-lg-3 overlay-links border-start">
+                    <ul class="list-unstyled text-uppercase overlay-links1">
+                        <li class="d-flex justify-content-between">
+                            <div class="flip-card-content">
+                                <a href="about-2.html" class="flip-card-side-a">about</a>
+                                <a href="about-2.html" class="flip-card-side-b">about</a>
+                            </div>
+                            <div class="">
+                                <div class="">
+                                    <a onclick="closeNav()"><i class="bi bi-x-lg"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flip-card-content">
+                                <a class="flip-card-side-a" href="services.html">360 services</a>
+                                <a class="flip-card-side-b" href="services.html">360 services</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flip-card-content">
+                                <a class="flip-card-side-a" href="principles-2.html">principles</a>
+                                <a class="flip-card-side-b" href="principles-2.html">principles</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flip-card-content">
+                                <a class="flip-card-side-a" href="news-2.html">news</a>
+                                <a class="flip-card-side-b" href="news-2.html">news</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flip-card-content">
+                                <a class="flip-card-side-a" href="team-2.html">team</a>
+                                <a class="flip-card-side-b" href="team-2.html">team</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flip-card-content">
+                                <a class="flip-card-side-a" href="contact-2.html">contact</a>
+                                <a class="flip-card-side-b" href="contact-2.html">contact</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flip-card-content">
+                                <a class="flip-card-side-a" href="vshowroom.html">Virtual Showroom</a>
+                                <a class="flip-card-side-b" href="vshowroom.html">Virtual Showroom</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flip-card-content overlay-links1-last">
+                                <a class="flip-card-side-a" href="lab-2.html"><img src="gms/assets/img/lab.svg" height="65"
+                                                                                alt=""></span></a>
+                                <a class="flip-card-side-b" href="lab-2.html"><img src="gms/assets/img/lab.svg" height="65"
+                                                                                alt=""></span></a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list-unstyled text-capitalize overlay-links2">
+                        
+                                <li>
+                                    <a href="https://www.instagram.com/gmsfashionltd/" target="_blank">Instagram</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/gms-showroom/" target="_blank">LinkedIn</a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/gmsfashionltd" target="_blank">Twitter</a>
+                                </li>                        <li class="d-flex justify-content-between">
+                            <a href="https://www.facebook.com/gmsfashionltd/">Facebook</a>
+                            <a href="privacy.html">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-block d-lg-none col-12 col-lg-3 overlay-links border-start">
+                    <ul class="list-unstyled text-uppercase overlay-links1">
+                        <li class="d-flex justify-content-between">
+                            <a href="about-2.html" class="flip-card-side-a">about</a>
+                        </li>
+                        <li>
+                            <a class="flip-card-side-a" href="services.html">360 services</a>
+                        </li>
+                        <li>
+                            <a class="flip-card-side-a" href="principles-2.html">principles</a>
+                        </li>
+                        <li>
+                            <a class="flip-card-side-a" href="news-2.html">news</a>
+                        </li>
+                        <li>
+                            <a class="flip-card-side-a" href="team-2.html">team</a>
+                        </li>
+                        <li>
+                            <a class="flip-card-side-a" href="contact-2.html">contact</a>
+                        </li>
+                        <li>
+                            <a class="flip-card-side-a" href="vshowroom.html">Virtual Showroom</a>
+                        </li>
+                        <li>
+                            <a class="flip-card-side-a" href="lab-2.html">
+                                <img src="gms/assets/img/lab.svg" height="65" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="list-unstyled text-capitalize overlay-links2">
+                        
+                                <li>
+                                    <a href="https://www.instagram.com/gmsfashionltd/">Instagram</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/gms-showroom/">LinkedIn</a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/gmsfashionltd">Twitter</a>
+                                </li>                        <li class="d-flex justify-content-between">
+                            <a href="https://www.facebook.com/gmsfashionltd/">Facebook</a>
+                            <a href="privacy.html">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>            <!-- page title -->
+            <div class="p-lg-3 py-2 mb-5">
+                <div>
+                    <i class="bi bi-plus-lg"></i>GMS Virtual Showroom
+                </div>
+            </div>
+
+            <!-- virtual showroom banner -->
+
+            <div class="ptext ps-lg-5 mb-5 fs-2">
+                                <p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"=""><b>THE VIRTUAL SHOWROOM
+</b></p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"=""><b>Garments in the digital realm</b><br></p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"=""><b><br></b></p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"="">
+
+On our mission to build the future of fashion sourcing, GMS LAB has created the Virtual Showroom, which provides an outlet for clients to view 3D samples in detail&nbsp;from all angles.
+</p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"=""><br></p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"="">
+With the ambience of a brick and mortar showroom, the Virtual Showroom allows visitors to walk around freely in its well-designed space with racks full of garments, all created by the GMS LAB 3D team. Clients can drop in any time, from any place, and  
+simply by navigating through the showroom, they engage in a 360-degree realistic view of the samples while getting a complete presentation of information about a product including its style name, quality, country of origin and lead times.
+</p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"=""><br></p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"="">
+An effective and innovative tool providing a seamless user experience, The Virtual Showroom perfectly aligns with our sustainable&nbsp;ethos by reducing&nbsp;the environmental impact of our activities.</p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"=""><br></p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"="">GMS LAB’s Virtual Showroom is evolving to allow a fully digital sourcing experience, where our clients will be able to place orders directly.</p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"=""><br></p><p class="p1" style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal;" times="" new="" roman";"="">Watch this space!<br></p> 
+            </div>
+
+            <!-- TODO: ek-->
+
+            <div class="iframewrapper pb-4">
+                <img src="gms/assets/img/vshowroom.png" alt="" width="100%" >
+                <div class="iframe-overlay">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="fs-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Enter The Experience
+                    </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <button type="button" class="btn-close ms-auto m-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <iframe src="https://www.virtrix.io/gms/virtualshowroom" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:98%;width:100%;position:absolute;top:40px;left:0px;right:0px;bottom:0px" height="100%" width="100%" allow="fullscreen"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="container-fluid row m-0 px-lg-3 py-lg-5 p-1">
+    <div class="col-12 col-lg-4 col1">
+        <a href="index-2.html" class="footer-logo order-lg-last">GMS <img src="gms/assets/img/plus.svg" alt="" class="ps-2 pb-1"></a>
+        <div class="footerslogan w-lg-50 pb-3">We create legacy for forward-thinking brands that generate lasting
+            value.
+        </div>
+    </div>
+    <div class="col-12 col-lg-2"></div>
+    <div class="col-12 col-lg-2">
+        <ul class="list-unstyled text-capitalize footer-links">
+            <div>
+                
+                    <li>
+                        <a href="https://www.instagram.com/gmsfashionltd/" target="_blank">Instagram</a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/company/gms-showroom/" target="_blank">LinkedIn</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/gmsfashionltd" target="_blank">Twitter</a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/gmsfashionltd/" target="_blank">Facebook</a>
+                    </li>            </div>
+            <div>
+                <a href="privacy.html">Privacy</a>
+            </div>
+        </ul>
+    </div>
+        <div class="col-12 col-lg-4 collast d-flex flex-column justify-content-between">
+
+        <div class="mb-3">
+            <div class="fw-bold">GMS HEADQUARTERS</div>
+            MONDRIAN GMS FASHION L.L.C 4502, <br> SINGLE BUSINESS TOWER, BUSINESS BAY, DUBAI, UAE<br>
+            T +971 4 578 7165 F +971 4 578 7118        </div>
+
+        <div class="mt-5">
+            © Global Management Services Ltd 2025        </div>
+    </div>
+</footer>
+
+    </div>
+
+    <script src="gms/assets/vendor/jquery.min.js"></script>
+    <script src="gms/assets/scripts/main.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- owl -->
+    <script src="gms/assets/vendor/owl.carousel.min.js"></script>
+
+</body>
+
+
+</html>
