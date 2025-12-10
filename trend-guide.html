@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>AW24 颜色 & 造型趋势指南</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --bg-elevated: #10121a;
+      --bg-elevated-soft: #151826;
+      --accent: #ff7b5a;
+      --accent-soft: rgba(255, 123, 90, 0.18);
+      --text-main: #f7f7fb;
+      --text-muted: #9ea4c4;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --chip-dark: #171a24;
+      --chip-light: #202433;
+      --badge-bg: rgba(158, 164, 196, 0.12);
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at 0% 0%, #24243e 0%, #0b0c10 45%, #000 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      max-width: 1220px;
+      margin: 24px auto;
+      padding: 16px;
+      gap: 18px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 16px;
+      height: calc(100vh - 32px);
+      padding: 18px 16px;
+      background: linear-gradient(160deg, #151728 0%, #090a0f 100%);
+      border-radius: 22px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 10%, #ffecd2 0, #ff7b5a 45%, #2b5876 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--badge-bg);
+      color: var(--text-muted);
+    }
+
+    .nav-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      margin-top: 10px;
+    }
+
+    .nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-right: 4px;
+      overflow-y: auto;
+    }
+
+    .nav-item a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .nav-item span.nav-tag {
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
+    .nav-item a:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      transform: translateX(2px);
+    }
+
+    .nav-item a.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Content */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero {
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: radial-gradient(circle at 10% -10%, rgba(255, 255, 255, 0.06), transparent 55%),
+        linear-gradient(135deg, #151728 0%, #090a0f 60%, #151728 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -80px;
+      background: radial-gradient(circle at 80% 0%, rgba(255, 123, 90, 0.18), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .hero-main {
+      max-width: 480px;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 650;
+      margin-bottom: 6px;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(11, 12, 16, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+    }
+
+    .hero-key {
+      font-size: 12px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 12px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+    }
+
+    .hero-key strong {
+      color: var(--accent);
+    }
+
+    .hero-side {
+      min-width: 200px;
+      max-width: 260px;
+      font-size: 11px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+    }
+
+    .hero-side-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .hero-side-label {
+      opacity: 0.75;
+    }
+
+    .hero-side-value {
+      font-weight: 500;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* Section blocks */
+    section {
+      scroll-margin-top: 70px;
+    }
+
+    .section {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 16px 18px 14px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 8px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .section-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-dark);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Layout helpers */
+    .grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--bg-elevated-soft);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 11px 9px;
+      font-size: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .card-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+    }
+
+    .tag-accent {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    ul.clean-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.clean-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 3px;
+      font-size: 12px;
+    }
+
+    ul.clean-list li span.bullet {
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 6px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #141723;
+    }
+
+    .table thead {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .table th,
+    .table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      text-align: left;
+    }
+
+    .table th {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+    }
+
+    .badge-dot i {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+    }
+
+    .dot-dark { background: #111318; }
+    .dot-earth { background: #7b4b33; }
+    .dot-red { background: #c62828; }
+    .dot-pink { background: #ff4b8b; }
+    .dot-yellow { background: #ffd447; }
+    .dot-blue { background: #3f51b5; }
+    .dot-green { background: #4caf50; }
+
+    .color-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .color-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: #151826;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .color-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .page {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 8px;
+      }
+      .sidebar {
+        position: static;
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .nav {
+        max-height: 120px;
+      }
+      .hero {
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero-inner {
+        flex-direction: column;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="brand">
+          <div class="brand-logo">AW</div>
+          <div class="brand-meta">
+            <div class="brand-title">AW24/25 Trend System</div>
+            <div class="brand-sub">Color · Shape · Fabric · Print</div>
+          </div>
+        </div>
+        <div class="badge-row">
+          <span class="badge">UX/UI 结构化总览</span>
+          <span class="badge">设计 & 企划共用</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="nav-label">导航 · Sections</div>
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="#overview">
+              <span>01 · 总览概况</span>
+              <span class="nav-tag">要点速览</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#colors">
+              <span>02 · 色彩趋势</span>
+              <span class="nav-tag">Colors</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#silhouettes">
+              <span>03 · 版型 & 廓形</span>
+              <span class="nav-tag">Shapes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#details">
+              <span>04 · 细节 & 饰件</span>
+              <span class="nav-tag">Trims</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#fabrics">
+              <span>05 · 季节面料</span>
+              <span class="nav-tag">Fabrics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#prints">
+              <span>06 · 印花方向</span>
+              <span class="nav-tag">Prints</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div style="margin-bottom:4px;">✅ 建议用法：</div>
+        <div>· 设计 briefing<br>· 开季 kick-off<br>· SKU 规划前对齐趋势语言</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-main">
+            <div class="hero-title">AW24/25 颜色 & 造型趋势导航</div>
+            <div class="hero-subtitle">
+              将“去深色 + 自然 + 解构 + 派对”的宏观趋势，拆成可执行的色彩、版型、面料与印花决策工具。
+            </div>
+            <div class="hero-tags">
+              <span class="hero-tag">Dark Core · 深色基础</span>
+              <span class="hero-tag">Nature · 大地自然</span>
+              <span class="hero-tag">Deconstructed · 解构手作</span>
+              <span class="hero-tag">Party Season · 派对季</span>
+            </div>
+            <div class="hero-key">
+              <strong>核心一句话：</strong>深色与大地色打底，亮色点亮冬季；宽松 anti-fit 与女性化 column & midi 裙共存；解构 + 手作 +
+              3D 装饰升级基础款；银色金属、缎和动物纹是秋冬亮点。
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="hero-side-row">
+              <span class="hero-side-label">Season</span>
+              <span class="hero-side-value">AW 24/25</span>
+            </div>
+            <div class="hero-side-row">
+              <span class="hero-side-label">Scope</span>
+              <span class="hero-side-value">女装主线 / 青年线</span>
+            </div>
+            <div class="hero-side-row">
+              <span class="hero-side-label">用途</span>
+              <span class="hero-side-value">设计 / 企划 / 采购</span>
+            </div>
+            <div class="chip-row">
+              <span class="chip">👗 版型规划</span>
+              <span class="chip">🎨 色卡跟进</span>
+              <span class="chip">📦 单品企划</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Overview -->
+      <section id="overview" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">01 · OVERVIEW</div>
+            <div class="section-title">趋势结构总览</div>
+          </div>
+          <div class="section-meta">
+            <span class="pill">设计 & 企划对齐用</span>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-label">模块 & 方向</div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>模块</th>
+                  <th>关键方向</th>
+                  <th>商业性</th>
+                  <th>备注</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>🎨 色彩 Colors</td>
+                  <td>深色基础 / 大地色 / 经典红 / 亮粉 / 亮黄 / 蓝 & 绿</td>
+                  <td>⭐⭐⭐⭐</td>
+                  <td>深色 + 大地色为基础盘，亮色负责点亮</td>
+                </tr>
+                <tr>
+                  <td>👗 版型 Silhouettes</td>
+                  <td>Power 肩、Anti-fit、Column、Midi 伞裙、Minis</td>
+                  <td>⭐⭐⭐⭐</td>
+                  <td>宽松廓形与女性化线条并存</td>
+                </tr>
+                <tr>
+                  <td>🧵 细节 Trims</td>
+                  <td>解构 / 手作 / 3D 装饰 / 拉链 / 扣具</td>
+                  <td>⭐⭐⭐</td>
+                  <td>升级基础款、增强价值感</td>
+                </tr>
+                <tr>
+                  <td>🧶 面料 Fabrics</td>
+                  <td>透视 & 蕾丝 / PU / 金属银 / 缎面 / 绗缝</td>
+                  <td>⭐⭐⭐⭐</td>
+                  <td>“派对 + 日常”混合使用</td>
+                </tr>
+                <tr>
+                  <td>🖼 印花 Prints</td>
+                  <td>动物纹 / 抽象模糊 / 波点 / 暗底亮花 / 拼接</td>
+                  <td>⭐⭐⭐</td>
+                  <td>动物纹 & 波点成为显性趋势</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <div class="card-label">设计决策提示</div>
+            <ul class="clean-list">
+              <li>
+                <span class="bullet">✅</span>
+                <span>用 <strong>黑/灰/大地色</strong> 构建系列地基，再选 2–3 个亮色作为全季主 pop 色。</span>
+              </li>
+              <li>
+                <span class="bullet">✅</span>
+                <span>至少准备 1 个 <strong>anti-fit 宽松方向</strong> 和 1 个 <strong>body-con / column 方向</strong>，形成轮廓对比。</span>
+              </li>
+              <li>
+                <span class="bullet">⭐</span>
+                <span>每个主题建议搭配 1 个 <strong>解构细节</strong> + 1 个 <strong>3D 装饰</strong>（蝴蝶结 / 花 / 立体口袋）。</span>
+              </li>
+              <li>
+                <span class="bullet">⚠️</span>
+                <span>秀场感较强的元素（裙裤叠穿、超拖地长度、双层腰头）以 <strong>小比例试水</strong>，配合强商业单品。</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Colors -->
+      <section id="colors" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">02 · COLORS</div>
+            <div class="section-title">色彩趋势 · 深色打底 + 亮色点缀</div>
+          </div>
+          <div class="section-meta">
+            <span class="pill">色卡规划 & 面料开发关键</span>
+          </div>
+        </div>
+
+        <!-- 基础 & 大地 -->
+        <div class="grid grid-2" style="margin-bottom:10px;">
+          <div class="card">
+            <div class="card-label">基础色 · 深色核心</div>
+            <div class="color-row">
+              <span class="badge-dot">
+                <i class="dot-dark"></i> Blacks / Greys
+              </span>
+            </div>
+            <p class="muted" style="margin-top:6px;">
+              作为 <strong>“Go Dark”</strong> 的基石色系，黑与灰将成为所有系列的结构底色和配色基础。
+            </p>
+            <ul class="clean-list" style="margin-top:4px;">
+              <li><span class="bullet">⭐</span><span>所有系列都需有大量深色：外套、针织、下装优先。</span></li>
+              <li><span class="bullet">💡</span><span>用不同材质（缎、PU、绗缝）做 <strong>同色异料</strong>，拉开层次。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">大地色 · 冬季自然感</div>
+            <div class="color-row">
+              <span class="badge-dot">
+                <i class="dot-earth"></i> Earthy Browns
+              </span>
+            </div>
+            <p class="muted" style="margin-top:6px;">
+              冬季森林、深土色等自然系棕色，是呼应“自然 / 户外 / 军事”宏观趋势的关键色。
+            </p>
+            <ul class="clean-list" style="margin-top:4px;">
+              <li><span class="bullet">⭐</span><span>适合大身：大衣、西装、cargo 裤、军装风外套。</span></li>
+              <li><span class="bullet">💡</span><span>与军绿、深林绿组合，形成“自然军旅”色组。</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 红 / 橙 / 粉 -->
+        <div class="grid grid-3" style="margin-bottom:10px;">
+          <div class="card">
+            <div class="card-label">红色系 · 情绪焦点</div>
+            <div class="color-row">
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#c62828;"></span>
+                <span>High Risk Red · 经典正红</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#9c4426;"></span>
+                <span>Sienna · 砖红</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#8c2b28;"></span>
+                <span>Equestrian Red · 马术红</span>
+              </span>
+            </div>
+            <ul class="clean-list" style="margin-top:6px;">
+              <li><span class="bullet">⭐</span><span>回归“经典正红”，适合节日 / Party 主题大件。</span></li>
+              <li><span class="bullet">💡</span><span>Sienna & Equestrian Red 为 <strong>新红色方向</strong>，值得重点开发。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">橙色系 · 从橙到陶土</div>
+            <div class="color-row">
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#e65100;"></span>
+                <span>Reddish Orange</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#c56a3b;"></span>
+                <span>Terracotta Orange</span>
+              </span>
+            </div>
+            <p class="muted" style="margin-top:6px;">
+              经典橙减弱，<strong>偏红橙 & 陶土橙</strong>成为主角，用作点缀更合适。
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-label">粉色系 · 商业王牌</div>
+            <div class="color-row">
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#e5b7c9;"></span>
+                <span>Dusty / Powdery Rose</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#ff4b8b;"></span>
+                <span>Fuchsia Pink</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#ffc4de;"></span>
+                <span>Classic Girly Pink</span>
+              </span>
+            </div>
+            <ul class="clean-list" style="margin-top:6px;">
+              <li><span class="bullet">⭐</span><span>Fuchsia 为 <strong>高商业性色</strong>，多国反馈良好。</span></li>
+              <li><span class="bullet">💡</span><span>Dusty Rose 带来柔和女性感，适合连衣裙 / 针织。</span></li>
+              <li><span class="bullet">🔁</span><span>经典少女粉仍在，适合作为基础粉色补充。</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 黄 / 绿 / 蓝 -->
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="card-label">黄 & 黄绿系 · 提亮暗冬</div>
+            <div class="color-row">
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#ffd447;"></span>
+                <span>Super Lemon · 亮冬黄</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#fbe7aa;"></span>
+                <span>Pale Banana · 淡香蕉</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#cddc39;"></span>
+                <span>Citrus Green · 柑橘绿</span>
+              </span>
+            </div>
+            <ul class="clean-list" style="margin-top:6px;">
+              <li><span class="bullet">⭐</span><span>黄系持续增长，建议每个系列至少有 1–2 个 SKU。</span></li>
+              <li><span class="bullet">💡</span><span>Citrus Green 等黄绿用作 <strong>pop 内搭</strong>，提亮深色外套。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">蓝色系 · 销售保险色</div>
+            <div class="color-row">
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#90caf9;"></span>
+                <span>Solar Light Blue</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#5c6bc0;"></span>
+                <span>Clematis Blue</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#1e88e5;"></span>
+                <span>Directory Blue</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#283593;"></span>
+                <span>Blue Danube · 新蓝</span>
+              </span>
+            </div>
+            <p class="muted" style="margin-top:6px;">
+              蓝色极具商业性，应覆盖牛仔、针织、外套等多个品类，<strong>Blue Danube 作为新方向</strong>值得重点试水。
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-label">绿色系 · 军旅 & 森林</div>
+            <div class="color-row">
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#2e7d32;"></span>
+                <span>Bright Green / Island Green</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#455a2a;"></span>
+                <span>Absent Green · 微灰绿</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#3e4d33;"></span>
+                <span>Army Tones · 军绿</span>
+              </span>
+              <span class="color-chip">
+                <span class="color-swatch" style="background:#203020;"></span>
+                <span>Forest Green · 深林绿</span>
+              </span>
+            </div>
+            <ul class="clean-list" style="margin-top:6px;">
+              <li><span class="bullet">⭐</span><span>军绿 & 森林绿为外套 / 工装主色，连接自然宏观趋势。</span></li>
+              <li><span class="bullet">💡</span><span>Absent Green 略带灰度，可用于提升整体高级感。</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Silhouettes -->
+      <section id="silhouettes" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">03 · SILHOUETTES</div>
+            <div class="section-title">版型 & 廓形 · Anti-fit 与女性线条并存</div>
+          </div>
+          <div class="section-meta">
+            <span class="pill">版型库 & 尺寸策略参考</span>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom:10px;">
+          <div class="card">
+            <div class="card-label">上身轮廓 & 肩线</div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>趋势</th>
+                  <th>描述</th>
+                  <th>商业性</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>💪 Power Shoulders</td>
+                  <td>夸张肩垫，80s 风格，肩线持续变大。</td>
+                  <td>⭐⭐⚡</td>
+                </tr>
+                <tr>
+                  <td>🚫 无驳头西装</td>
+                  <td>Tailoring with no lapel，简洁利落。</td>
+                  <td>⭐⭐⭐</td>
+                </tr>
+                <tr>
+                  <td>🎈 Balloon & Puff</td>
+                  <td>气球袖 / 裤脚，从 SS 延续，袖子更雕塑感。</td>
+                  <td>⭐⭐⭐</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <div class="card-label">下装 & 叠穿方式</div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>趋势</th>
+                  <th>描述</th>
+                  <th>备注</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>🩳 Bermuda Shorts</td>
+                  <td>夏季延续到秋冬，搭配高筒靴。</td>
+                  <td>⚡ 强搭配属性</td>
+                </tr>
+                <tr>
+                  <td>🧥 Skirt + Pants</td>
+                  <td>裙裤叠穿，秀场中大量出现。</td>
+                  <td>⚠ 秀场感高，少量试水</td>
+                </tr>
+                <tr>
+                  <td>👖 Extra Wide / Long</td>
+                  <td>超宽 / 超长裤型，接近拖地。</td>
+                  <td>⚠ 实穿上建议略缩短</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom:10px;">
+          <div class="card">
+            <div class="card-label">轮廓两极 · Anti-fit vs Body-con</div>
+            <ul class="clean-list">
+              <li><span class="bullet">😌</span><span><strong>Anti-fit / Slouchy</strong>：宽松、下垂，适用于针织、大衣、牛仔、长裤。</span></li>
+              <li><span class="bullet">🧍</span><span><strong>Column Shapes</strong>：直筒柱形连衣裙 / 裙，从春夏延续到秋冬。</span></li>
+              <li><span class="bullet">👗</span><span><strong>Midi Volume Skirt</strong>：中长 + 大摆 + 褶皱，趋势与商业兼具。</span></li>
+              <li><span class="bullet">👧</span><span><strong>Minis</strong>：迷你裙仍然是年轻 / 派对线标配。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">关键单品 & 设计方向</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🧣</span><span><strong>Super cropped & Bolero</strong>：受 balletcore 影响强势回归。</span></li>
+              <li><span class="bullet">🔥</span><span><strong>Off shoulder</strong>：夏季趋势延续到冬季，为冬装增加性感度。</span></li>
+              <li><span class="bullet">🧰</span><span><strong>Upgraded Utility</strong>：工装升级为更 luxe、更 sartorial 版本。</span></li>
+              <li><span class="bullet">🪡</span><span><strong>Wrap & Drape</strong>：围裹与褶裥加强女性曲线。</span></li>
+              <li><span class="bullet">🔔</span><span><strong>Bell Shape</strong>：上衣 / 裤脚微喇，适合作为“微趋势细节”。</span></li>
+              <li><span class="bullet">🧢</span><span><strong>Hoodie</strong>：加入帽衫单品，为系列注入年轻感。</span></li>
+              <li><span class="bullet">💋</span><span><strong>Lingerie & Slip Dress</strong>：吊带裙显著回升，预计为强势销售品类。</span></li>
+              <li><span class="bullet">♻</span><span><strong>Asymmetry</strong>：不对称作为“快速上趋势”的手段。</span></li>
+              <li><span class="bullet">🐢</span><span><strong>Turtleneck</strong>：高领大量出现，依靠面料 / 印花升级。</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Details -->
+      <section id="details" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">04 · DETAILS</div>
+            <div class="section-title">细节 & 饰件 · 解构 / 手作 / 3D 装饰</div>
+          </div>
+          <div class="section-meta">
+            <span class="pill">提升单品价值感</span>
+          </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-bottom:10px;">
+          <div class="card">
+            <div class="card-label">解构 & 手作感</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🧩</span><span><strong>Deconstructed</strong>：里外翻、结构拆解，露出内里细节。</span></li>
+              <li><span class="bullet">🧵</span><span><strong>Crafted Edges</strong>：手工感边缘、粗线迹处理。</span></li>
+              <li><span class="bullet">🧷</span><span><strong>Raw & Destroyed</strong>：破坏边缘与做旧牛仔，属于解构语系。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">功能感 & 金属件</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🔗</span><span><strong>Zippers</strong>：显性拉链，可强化功能感与年轻感。</span></li>
+              <li><span class="bullet">⛓</span><span><strong>Buckles</strong>：冬季常用升级手段，提升硬朗度。</span></li>
+              <li><span class="bullet">✂</span><span><strong>Drawstrings</strong>：抽绳大量出现，调整轮廓 + 装饰双重作用。</span></li>
+              <li><span class="bullet">⭐</span><span><strong>Studs</strong>：铆钉带来 rock & roll 气质，与黑色 / 皮质搭配效果佳。</span></li>
+              <li><span class="bullet">🎖</span><span><strong>Patches & Emblems</strong>：章仔与校队风徽章，延续 varsity 方向。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">立体装饰 & 女性细节</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🎀</span><span><strong>3D Bows & Flowers</strong>：立体蝴蝶结和花朵，是关键视觉点。</span></li>
+              <li><span class="bullet">🕸</span><span><strong>Lavish Lace</strong>：蕾丝与透视，为日常款增加性感度。</span></li>
+              <li><span class="bullet">🌊</span><span><strong>Frills & Ruffles</strong>：荷叶边、褶饰持续存在。</span></li>
+              <li><span class="bullet">↕</span><span><strong>High Slits & Ruching</strong>：高开衩 / 抽褶强化身体线条。</span></li>
+              <li><span class="bullet">📦</span><span><strong>3D Pockets</strong>：立体口袋呼应 utility 升级。</span></li>
+              <li><span class="bullet">🙈</span><span><strong>Peekaboo Details</strong>：尤其是肩部的小面积露肤细节。</span></li>
+              <li><span class="bullet">👖</span><span><strong>Double-waisted Pants</strong>：双层腰头，秀场出现频繁，值得小比例尝试。</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fabrics -->
+      <section id="fabrics" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">05 · FABRICS</div>
+            <div class="section-title">季节面料 · 透视 / 功能 / 派对材质</div>
+          </div>
+          <div class="section-meta">
+            <span class="pill">面料企划 & 打样指南</span>
+          </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-bottom:10px;">
+          <div class="card">
+            <div class="card-label">透视 & 腐蚀 & 结构</div>
+            <ul class="clean-list">
+              <li><span class="bullet">👻</span><span><strong>Sheer Fabrics</strong>：大量透视，特别适用于派对季。</span></li>
+              <li><span class="bullet">🕸</span><span><strong>Lace</strong>：配合透视用，极大提升性感氛围。</span></li>
+              <li><span class="bullet">🧪</span><span><strong>Eroded / Destroyed</strong>：像在地里埋过，具有腐蚀感。</span></li>
+              <li><span class="bullet">🧱</span><span><strong>3D Structures</strong>：结构纹理面料，延续 Y2K / 90s 风。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">功能 & 经典冬季素材</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🧰</span><span><strong>Cargo Fabrics</strong>：坚韧工装面料仍为焦点。</span></li>
+              <li><span class="bullet">🧴</span><span><strong>PU / Leather-look</strong>：秀场皮感极多，PU 是必备。</span></li>
+              <li><span class="bullet">🐍</span><span><strong>Snake on PU</strong>：蛇纹尤其适合用在 PU 上。</span></li>
+              <li><span class="bullet">🧵</span><span><strong>Corduroy & Velvet</strong>：灯芯绒与丝绒，适合表现秋冬色彩。</span></li>
+              <li><span class="bullet">🧷</span><span><strong>Quilted Fabrics</strong>：绗缝是冬季标配。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">金属 & 缎 & 派对面料</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🪙</span><span><strong>Metallics</strong>：从金色转向<strong>银色</strong>为焦点，银涂层 / 亮片均可。</span></li>
+              <li><span class="bullet">🥂</span><span><strong>Satin</strong>：继续重要，需追求高级手感，避免廉价涤纶感。</span></li>
+              <li><span class="bullet">🎉</span><span><strong>Party Fabrics</strong>：亮片、闪片等对应派对季。</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prints -->
+      <section id="prints" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">06 · PRINTS</div>
+            <div class="section-title">印花方向 · 动物纹 / 抽象 / 暗底亮花</div>
+          </div>
+          <div class="section-meta">
+            <span class="pill">AOP & 局部印花策划</span>
+          </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-bottom:10px;">
+          <div class="card">
+            <div class="card-label">动物 & 自然相关印花</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🐆</span><span><strong>Classic Animals</strong>：豹纹、斑马纹继续强势。</span></li>
+              <li><span class="bullet">🐍</span><span><strong>Snake Print</strong>：蛇纹从低迷期强势回归。</span></li>
+              <li><span class="bullet">🪖</span><span><strong>Soft Camo</strong>：更柔和的自然迷彩，可偏花卉 / 植物方向。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">侵蚀 / 抽象 / 元宇宙感</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🧬</span><span><strong>Eroded Prints</strong>：侵蚀感花卉 & 图案。</span></li>
+              <li><span class="bullet">🎨</span><span><strong>Abstract / Blurry</strong>：抽象、模糊、笔触感图案。</span></li>
+              <li><span class="bullet">🌫</span><span><strong>Blurry Florals</strong>：朦胧花卉，连接抽象趋势。</span></li>
+              <li><span class="bullet">🪐</span><span><strong>Metaverse-inspired</strong>：带“异世界 / 虚拟感”的抽象打印。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-label">其它重点印花</div>
+            <ul class="clean-list">
+              <li><span class="bullet">🌊</span><span><strong>Winter Tie-dye</strong>：冬季扎染，整体调性更暗。</span></li>
+              <li><span class="bullet">🧵</span><span><strong>Ethnic Prints</strong>：少量民族感图案，增加故事性。</span></li>
+              <li><span class="bullet">😜</span><span><strong>Quirky & Fun</strong>：有趣幽默图案，适合年轻支线。</span></li>
+              <li><span class="bullet">⚫</span><span><strong>Dots</strong>：波点从“非趋势”升级为“趋势印花”。</span></li>
+              <li><span class="bullet">🌸</span><span><strong>Upscale Florals</strong>：升级花卉 / 大花图案延续到秋冬。</span></li>
+              <li><span class="bullet">🎨</span><span><strong>Easy Two-tone Prints</strong>：双色简洁印花，容易穿搭。</span></li>
+              <li><span class="bullet">💐</span><span><strong>Pop Florals on Dark Ground</strong>：深底 + 亮花，点亮深色系列。</span></li>
+              <li><span class="bullet">🧩</span><span><strong>Print Mix</strong>：大小图案混搭 / 围巾式拼接 / 解构式拼布。</span></li>
+              <li><span class="bullet">🧵</span><span><strong>Classic & Pop Checks</strong>：经典格纹 + 高饱和年轻格纹，呼应 sartorial 趋势。</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // 简单滚动高亮导航逻辑
+    const sections = document.querySelectorAll("section.section, .hero");
+    const navLinks = document.querySelectorAll(".nav-item a");
+
+    function onScroll() {
+      let currentId = null;
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < 140 && rect.bottom > 140) {
+          currentId = section.id;
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        const href = link.getAttribute("href");
+        if (href && currentId && href === "#" + currentId) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("scroll", onScroll);
+  </script>
+</body>
+</html>
