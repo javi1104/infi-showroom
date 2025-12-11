@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>IQC / AQC 第二次理论培训 - 知识要点总结</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
+        sans-serif;
+      background-color: #f5f7fb;
+      color: #222;
+      line-height: 1.6;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    /* 左侧导航 */
+    .sidebar {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 20px 16px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 20px;
+    }
+    .toc-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    .toc {
+      list-style: none;
+      padding-left: 0;
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+    .toc li {
+      margin: 4px 0;
+    }
+    .toc a {
+      color: #e5e7eb;
+      display: block;
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+    .toc a:hover {
+      background: #1f2937;
+    }
+    .toc-small {
+      padding-left: 10px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    /* 主内容 */
+    .content {
+      padding: 24px 32px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 26px;
+      margin: 0 0 8px;
+    }
+    .tagline {
+      margin-bottom: 18px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .meta-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #e5e7eb;
+    }
+    .section {
+      margin-bottom: 26px;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+    .section h2 {
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section h3 {
+      font-size: 16px;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+    .badge {
+      font-size: 11px;
+      background: #eef2ff;
+      color: #4f46e5;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 4px;
+    }
+    p {
+      margin: 4px 0 8px;
+      font-size: 14px;
+    }
+    ul, ol {
+      margin: 4px 0 8px 20px;
+      padding-left: 0;
+      font-size: 14px;
+    }
+    li {
+      margin: 2px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0 10px;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 6px 8px;
+      vertical-align: top;
+    }
+    th {
+      background: #f3f4f6;
+      font-weight: 600;
+      text-align: left;
+    }
+    code {
+      font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      font-size: 12px;
+      background: #f3f4f6;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    .highlight {
+      font-weight: 600;
+      color: #b91c1c;
+    }
+    .note {
+      padding: 6px 8px;
+      border-left: 3px solid #3b82f6;
+      background: #eff6ff;
+      border-radius: 4px;
+      font-size: 13px;
+      margin: 6px 0 8px;
+    }
+    .flow {
+      font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      white-space: pre-wrap;
+      font-size: 12px;
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 10px 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      margin-right: 4px;
+      margin-bottom: 2px;
+    }
+    .pill-primary {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+    .pill-danger {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .pill-success {
+      background: #dcfce7;
+      color: #15803d;
+    }
+    .pill-warning {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .key-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .key-points span {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #374151;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: static;
+        height: auto;
+        display: none; /* 如需手机端显示目录，可以改成 block */
+      }
+      .content {
+        padding: 16px 14px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <!-- 侧边导航 -->
+  <aside class="sidebar">
+    <div class="logo">IQC / AQC 培训总结</div>
+    <div class="subtitle">第二次理论培训 · 复习&考试辅助</div>
+
+    <div class="toc-title">目录</div>
+    <ul class="toc">
+      <li><a href="#sec1">一、培训与考试信息</a></li>
+      <li><a href="#sec2">二、IQC / AQC 的定位</a></li>
+      <li><a href="#sec3">三、AQC 评估机制</a></li>
+      <li><a href="#sec4">四、缺点分类</a></li>
+      <li><a href="#sec5">五、尺寸测量与尺子校准</a></li>
+      <li><a href="#sec6">六、检验前资料准备</a></li>
+      <li><a href="#sec7">七、抽箱与包装要点</a></li>
+      <li><a href="#sec8">八、AQL 抽样与判定</a></li>
+      <li><a href="#sec9">九、防霉与干燥要求</a></li>
+      <li><a href="#sec10">十、验针与物理测试</a></li>
+      <li><a href="#sec11">十一、自检报告填写</a></li>
+      <li><a href="#sec12">十二、产前会与质量手册</a></li>
+      <li><a href="#sec13">十三、整体自检流程图</a></li>
+    </ul>
+
+    <div class="toc-title">考试重点</div>
+    <ul class="toc toc-small">
+      <li>• 三类缺点：Critical / Major / Minor</li>
+      <li>• 尺寸测量规则 & 尺子校准</li>
+      <li>• AQL 抽样、可接受缺点数</li>
+      <li>• 锁扣样衣 & 资料齐全</li>
+      <li>• 防霉、干燥房、验针要求</li>
+    </ul>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="content">
+    <header>
+      <h1>IQC / AQC 第二次理论培训 — 知识要点总结</h1>
+      <div class="tagline">
+        用于理论复习、自检规范回顾和 12 月下旬 AQC 考核准备。
+      </div>
+      <div class="meta-bar">
+        <span class="meta-chip">培训主题：IQC / AQC 第二次理论培训</span>
+        <span class="meta-chip">形式：理论讲解 + 实操原理总结</span>
+        <span class="meta-chip">用途：考前复习 / 实务查阅</span>
+      </div>
+    </header>
+
+    <!-- 一、培训与考试信息 -->
+    <section id="sec1" class="section">
+      <h2>一、培训与考试信息总览 <span class="badge">基础信息</span></h2>
+      <table>
+        <tr>
+          <th>项目</th>
+          <th>内容</th>
+        </tr>
+        <tr>
+          <td>培训类型</td>
+          <td>IQC / AQC 第二次理论培训（偏“实操原理总结”）</td>
+        </tr>
+        <tr>
+          <td>培训目的</td>
+          <td>
+            ① 系统梳理日常自检相关知识；<br>
+            ② 为 12 月下旬 IQC/AQC 考核做准备。
+          </td>
+        </tr>
+        <tr>
+          <td>时间与时长</td>
+          <td>计划 1 小时，实际略超时约 20 分钟。</td>
+        </tr>
+        <tr>
+          <td>参会人员</td>
+          <td>各外贸公司 IQC / AQC 候选人（国内、缅甸、柬埔寨等）。</td>
+        </tr>
+        <tr>
+          <td>特殊情况</td>
+          <td>部分同事未参加第一次理论培训，将安排补课，否则考试基本无通过可能。</td>
+        </tr>
+        <tr>
+          <td>考试时间</td>
+          <td>预计 12 月 24 日左右（12 月下旬统一线上考试）。</td>
+        </tr>
+        <tr>
+          <td>通过条件</td>
+          <td>理论 + 实操都达标 → 颁发 AQC 证书 / 认证。</td>
+        </tr>
+      </table>
+      <div class="note">
+        <strong>★ 关键记忆：</strong>考前务必把两次培训的内容、质量手册、包装手册等完整翻一遍；未上第一次培训的，要先补课再参加考试。
+      </div>
+    </section>
+
+    <!-- 二、IQC / AQC 的定位 -->
+    <section id="sec2" class="section">
+      <h2>二、IQC / AQC 的定位 & 汇报关系 <span class="badge">角色认知</span></h2>
+      <h3>1. 岗位本质（一句话）</h3>
+      <p>
+        <span class="highlight">IQC / AQC = 代表 Bestseller 质量团队进行最终产品验收的“授权检验员”。</span>
+      </p>
+
+      <h3>2. 职责结构表</h3>
+      <table>
+        <tr>
+          <th>维度</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>身份</td>
+          <td>受外贸公司雇佣，同时通过 Bestseller 培训 + 考核 + 认证的 AQC。</td>
+        </tr>
+        <tr>
+          <td>核心职责</td>
+          <td>按品牌标准，对大货进行自检，代表 BS 质量团队做“出货前质量把关”。</td>
+        </tr>
+        <tr>
+          <td>工作目标</td>
+          <td>与工厂 QC / 外贸公司 / BS QA 的目标一致：减少出货问题，降低索赔风险。</td>
+        </tr>
+        <tr>
+          <td>汇报对象</td>
+          <td>
+            <span class="pill pill-primary">公司内部：自己公司领导</span>
+            <span class="pill pill-primary">BS 端：各区域 QA 同事</span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="note">
+        <strong>★ 要点：</strong>不是“听谁”的问题，而是同时对外贸公司和 Bestseller 质量团队负责。
+      </div>
+    </section>
+
+    <!-- 三、AQC 评估机制 -->
+    <section id="sec3" class="section">
+      <h2>三、AQC 的评估机制 <span class="badge">数据与现场</span></h2>
+      <h3>1. 两种评估方式</h3>
+      <table>
+        <tr>
+          <th>评估方式</th>
+          <th>具体做法</th>
+          <th>目的</th>
+        </tr>
+        <tr>
+          <td>① 数据对比</td>
+          <td>系统对比同一款/批货：AQC 自检结果 vs BSQC 结果（通过率、缺点比例、缺点类型）。</td>
+          <td>判断 AQC 眼光与 BSQC 的一致程度。</td>
+        </tr>
+        <tr>
+          <td>② QA 现场抽查</td>
+          <td>QA 随机到现场：抽大货→看实物→对比 AQC 自检报告。</td>
+          <td>检查记录的真实性、完整性、准确性。</td>
+        </tr>
+      </table>
+      <p>评估有定期也有不定期；每个 QA 心里都有一本“账”。</p>
+
+      <h3>2. 评估结果的处理</h3>
+      <ul>
+        <li>表现好：继续合作，自检比例有机会提高，BSQC 抽验减少。</li>
+        <li>表现差且无改进：会沟通辅导，严重时可能考虑更换 AQC。</li>
+      </ul>
+
+      <div class="note">
+        <strong>★ 要点：</strong>评估靠数据和记录，不靠“关系”；工作目标是让 AQC 与 BSQC 的判定结果尽量接近。
+      </div>
+    </section>
+
+    <!-- 四、缺点分类 -->
+    <section id="sec4" class="section">
+      <h2>四、产品缺点分类（Defects） <span class="badge">Critical / Major / Minor</span></h2>
+      <table>
+        <tr>
+          <th>类型</th>
+          <th>英文</th>
+          <th>特点</th>
+          <th>典型示例</th>
+          <th>可接受情况</th>
+        </tr>
+        <tr>
+          <td>⚠ 严重缺点</td>
+          <td>Critical</td>
+          <td>
+            可能影响整批货销售，<br>
+            或对消费者有安全 / 健康风险。
+          </td>
+          <td>断针、衣服发霉、有霉味、严重安全问题等。</td>
+          <td><span class="pill pill-danger">0 个容忍</span>（发现 1 个就不合格）。</td>
+        </tr>
+        <tr>
+          <td>◆ 主要缺点</td>
+          <td>Major</td>
+          <td>导致单件产品无法销售 / 无法正常使用。</td>
+          <td>一件衣服上有一个乒乓球大小破洞。</td>
+          <td>允许数量有限（按 AQL 标准计算）。</td>
+        </tr>
+        <tr>
+          <td>△ 次要缺点</td>
+          <td>Minor</td>
+          <td>消费者仍可能购买，但不满意，影响外观感受。</td>
+          <td>不显眼部位的小线头、小脏污等。</td>
+          <td>允许数量有限（按 AQL 标准计算）。</td>
+        </tr>
+      </table>
+
+      <div class="note">
+        <strong>★ 特别提醒：</strong>培训中明确：一件衣服有很大的破洞 ➜ 判为<strong>主要缺点</strong>，不是严重缺点；严重缺点着重在“安全风险 / 整批风险”。
+      </div>
+
+      <div class="key-points">
+        <span>严重 = 安全 / 整批风险</span>
+        <span>主要 = 单件无法销售</span>
+        <span>次要 = 勉强能卖但不满意</span>
+        <span>Major / Minor 分开计数</span>
+      </div>
+    </section>
+
+    <!-- 五、尺寸测量与尺子校准 -->
+    <section id="sec5" class="section">
+      <h2>五、尺寸测量 & 尺子校准 <span class="badge">测量规范</span></h2>
+      <h3>1. 尺子校准要求</h3>
+      <table>
+        <tr>
+          <th>项目</th>
+          <th>要求</th>
+        </tr>
+        <tr>
+          <td>校准周期</td>
+          <td>一般每 3 个月校准一次。</td>
+        </tr>
+        <tr>
+          <td>示例误差</td>
+          <td>20cm ±1mm；50cm ±1.5mm；100cm ±2mm（培训口径）。</td>
+        </tr>
+        <tr>
+          <td>责任范围</td>
+          <td>不仅 AQC 自己的尺子要校准，也要提醒工厂尺子定期校准。</td>
+        </tr>
+      </table>
+
+      <h3>2. 尺寸测量原则</h3>
+      <ul>
+        <li>所有服装产品都必须做尺寸测量。</li>
+        <li>不同品牌量法可能不同（如外套/夹克袖长：Jack & Jones vs 其他品牌）。</li>
+        <li>混色/混码抽样时，一般每个尺码至少测 3 件以上。</li>
+        <li>若发现某色/某码尺寸超标：
+          <ul>
+            <li>Jack & Jones / ONLY：按品牌具体尺寸要求执行。</li>
+            <li>其他品牌：建议额外多量 10–15 件该色/码。</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>3. J&J 尺寸 AQL 特例</h3>
+      <table>
+        <tr>
+          <th>情况</th>
+          <th>标准</th>
+        </tr>
+        <tr>
+          <td>正常首检</td>
+          <td>AQL 2.5（尺寸 + 做工）。</td>
+        </tr>
+        <tr>
+          <td>复验（首检不合格后）</td>
+          <td>AQL 1.5（更严格）。</td>
+        </tr>
+        <tr>
+          <td>抽样与测量</td>
+          <td>抽样件数不变，但判定更严；常规是“抽多少件基本就量多少件尺寸”。</td>
+        </tr>
+      </table>
+
+      <div class="note">
+        <strong>★ 要点：</strong>先确认自己负责的品牌，再按对应量法和标准执行；尺子和验针机一样，需定期校准。
+      </div>
+    </section>
+
+    <!-- 六、检验前资料准备 -->
+    <section id="sec6" class="section">
+      <h2>六、检验前资料准备清单 <span class="badge">Checklist</span></h2>
+      <p>没有下列资料，原则上不应开始自检：</p>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>具体内容</th>
+          <th>备注</th>
+        </tr>
+        <tr>
+          <td>订单资料</td>
+          <td>Bestseller 原始订单：款号、订单号、数量、包装方式、交期、面料成分等。</td>
+          <td>业务可遮盖价格等敏感信息，但关键信息必须完整。</td>
+        </tr>
+        <tr>
+          <td>最新尺码表</td>
+          <td>包含最新更新的尺寸规格。</td>
+          <td>注意是否为最新版本。</td>
+        </tr>
+        <tr>
+          <td>样衣意见</td>
+          <td>买手的 comments / 修改意见 / 工艺说明，通常会含锁扣编号。</td>
+          <td>如有锁扣编号，须与实际样衣锁扣编号一致。</td>
+        </tr>
+        <tr>
+          <td>确认样 + 锁扣</td>
+          <td>样衣上必须有锁扣（BS 锁扣或公司自有锁扣），且不可拆。</td>
+          <td>无锁扣样衣不接受作为最终标准样衣。</td>
+        </tr>
+        <tr>
+          <td>面料卡</td>
+          <td>清楚标识正反面，有签名/盖章。</td>
+          <td>避免反面当正面、混布等问题。</td>
+        </tr>
+        <tr>
+          <td>辅料卡</td>
+          <td>所有辅料齐全，中英文对照，有签名/盖章。</td>
+          <td>缺辅料无法完成完整自检。</td>
+        </tr>
+        <tr>
+          <td>物理测试报告</td>
+          <td>缩水、色牢度、克重等项目。</td>
+          <td>AQC 至少要能判断“是否合格”。</td>
+        </tr>
+      </table>
+
+      <div class="note">
+        <strong>★ 要点：</strong>“锁扣 + 标签 + 样衣照片”= 证明“这件就是最终标准样”；资料拿不到可私下找 QA 协调业务。
+      </div>
+    </section>
+
+    <!-- 七、抽箱与包装要点 -->
+    <section id="sec7" class="section">
+      <h2>七、抽箱 & 包装关键要点 <span class="badge">现场操作</span></h2>
+      <h3>1. 末期检验抽箱原则</h3>
+      <ul>
+        <li>必须保证：<strong>每个颜色 × 每个尺码都被抽到</strong>。</li>
+        <li>按数量分配：数量多的颜色/尺码抽箱多一点，数量少的少抽。</li>
+        <li>配比包装（Assort）：按箱数/配比正常抽即可。</li>
+        <li>独码包装（Solid）：中码抽多，小码/大码保证有样本用于尺寸测量。</li>
+        <li><span class="highlight">抽箱人必须是 AQC 自己</span>，不得他人代抽。</li>
+      </ul>
+
+      <h3>2. 破损箱处理</h3>
+      <ul>
+        <li>少量破损：在报告中备注，并要求工厂更换破损箱。</li>
+        <li>破损比例高：要求工厂查原因（受潮？箱子质量问题等）。</li>
+      </ul>
+
+      <h3>3. 包装方式分类</h3>
+      <table>
+        <tr>
+          <th>维度</th>
+          <th>类型</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>按形态</td>
+          <td>挂装</td>
+          <td>数量较少，按品牌要求执行。</td>
+        </tr>
+        <tr>
+          <td>按形态</td>
+          <td>箱装</td>
+          <td>主流方式。</td>
+        </tr>
+        <tr>
+          <td>箱装细分</td>
+          <td>Loose（散装）</td>
+          <td>箱规统一，可独码或配比。</td>
+        </tr>
+        <tr>
+          <td>箱装细分</td>
+          <td>Assort（配比）</td>
+          <td>大袋 + 多件、或单件袋但配比装箱等多种方式。</td>
+        </tr>
+      </table>
+
+      <h3>4. 纸箱尺寸与结构</h3>
+      <ul>
+        <li>基本规则：<strong>L（长） &gt; W（宽） ≥ H（高）</strong>。</li>
+        <li>Loose 订单：必须有 <strong>天地板</strong>，避免机器开箱时割伤衣物。</li>
+        <li>纸箱尺寸有最小/最大范围，按最新包装手册执行。</li>
+        <li>重量限制：Loose 与配比的最大箱重有区别，以手册为准。</li>
+        <li>箱贴位置：原则上两对角贴；箱子太矮时可部分延伸到上方，只要正/侧面有可扫码位置即可。</li>
+      </ul>
+
+      <h3>5. 不要为了箱规“折坏衣服”</h3>
+      <div class="note">
+        典型错误：为把西装、毛呢大衣塞进规定尺寸箱子，硬折 3–4 折 → 出现严重折痕 → 客户索赔。<br>
+        正确：发现衣服不适合按默认箱规折叠，应及时反馈给业务和 QA，申请特殊箱规。
+      </div>
+    </section>
+
+    <!-- 八、AQL 抽样与判定 -->
+    <section id="sec8" class="section">
+      <h2>八、AQL 抽样与判定 <span class="badge">抽样标准</span></h2>
+      <h3>1. 抽样数量与 AQL 的关系</h3>
+      <ul>
+        <li>同一批货在不同 AQL（2.5 / 1.5 / 1.0）下，<strong>抽样数量相同</strong>。</li>
+        <li>AQL 值越小 → 标准越严 → <strong>可接受缺点数量越少</strong>。</li>
+      </ul>
+
+      <h3>2. 培训例子：订单 10,001 件</h3>
+      <table>
+        <tr>
+          <th>项目</th>
+          <th>数值</th>
+        </tr>
+        <tr>
+          <td>订单总数</td>
+          <td>10,001 件</td>
+        </tr>
+        <tr>
+          <td>抽样数</td>
+          <td>315 件</td>
+        </tr>
+        <tr>
+          <td>严重缺点（Critical）</td>
+          <td><span class="pill pill-danger">0 个可接受</span></td>
+        </tr>
+        <tr>
+          <td>主要缺点（Major）</td>
+          <td><span class="pill pill-warning">≤ 14 个</span></td>
+        </tr>
+        <tr>
+          <td>次要缺点（Minor）</td>
+          <td><span class="pill pill-warning">≤ 14 个</span></td>
+        </tr>
+        <tr>
+          <td>说明</td>
+          <td>Major 与 Minor 各自计数，不合并。</td>
+        </tr>
+      </table>
+
+      <h3>3. ONLY / J&J 复验标准</h3>
+      <table>
+        <tr>
+          <th>品牌</th>
+          <th>首检</th>
+          <th>复验（首检不合格后）</th>
+        </tr>
+        <tr>
+          <td>ONLY / Jack & Jones</td>
+          <td>AQL 2.5</td>
+          <td>AQL 1.5（更严格）</td>
+        </tr>
+      </table>
+
+      <div class="note">
+        <strong>★ 要点：</strong>AQL 改为 1.5 时，抽样数量不变，只是放行条件更苛刻；严重缺点永远 0 容忍。
+      </div>
+    </section>
+
+    <!-- 九、防霉与干燥要求 -->
+    <section id="sec9" class="section">
+      <h2>九、防霉、湿度 & 干燥剂要求 <span class="badge">发霉风险控制</span></h2>
+      <h3>1. 干燥房（Dry Room）要求</h3>
+      <table>
+        <tr>
+          <th>项目</th>
+          <th>要求</th>
+        </tr>
+        <tr>
+          <td>适用范围</td>
+          <td>缅甸 & 柬埔寨工厂必须有干燥房；国内也逐步要求使用。</td>
+        </tr>
+        <tr>
+          <td>容量匹配</td>
+          <td>干燥房大小需与工厂产能匹配，不能 40 人产能配一个很小干燥房。</td>
+        </tr>
+        <tr>
+          <td>湿度指标</td>
+          <td>干燥房湿度需低于 50%，尤其雨季要严格控制。</td>
+        </tr>
+        <tr>
+          <td>形式</td>
+          <td>独立干燥房（挂装或流水式），或整个后道为空调+低湿环境。</td>
+        </tr>
+      </table>
+
+      <h3>2. 干燥剂 & 防霉纸（Macropack）</h3>
+      <table>
+        <tr>
+          <th>产品</th>
+          <th>用途</th>
+          <th>典型场景</th>
+        </tr>
+        <tr>
+          <td>防霉纸</td>
+          <td>放在高风险材料（真皮 / PU 等）内部，释放有效成分抑制发霉。</td>
+          <td>需在衣服本身已干燥的前提下使用。</td>
+        </tr>
+        <tr>
+          <td>箱内干燥剂</td>
+          <td>放在纸箱内控制湿度，逐步替代传统硅胶干燥剂。</td>
+          <td>普通布类产品常用。</td>
+        </tr>
+        <tr>
+          <td>集装箱干燥剂</td>
+          <td>挂在集装箱内，在运输过程中吸湿。</td>
+          <td>由工厂装柜时配置。</td>
+        </tr>
+      </table>
+
+      <div class="note">
+        <strong>★ 要点：</strong>发霉损失巨大，防霉纸/干燥剂必须配合“衣物本身已经干燥”；具体选型由工厂/外贸公司按产品风险决定。
+      </div>
+    </section>
+
+    <!-- 十、验针与物理测试 -->
+    <section id="sec10" class="section">
+      <h2>十、验针（减针）与物理测试 <span class="badge">安全 & 实测</span></h2>
+      <h3>1. 验针要求</h3>
+      <table>
+        <tr>
+          <th>项目</th>
+          <th>要求</th>
+        </tr>
+        <tr>
+          <td>金属检测标准</td>
+          <td>所有产品必须通过 1.2mm 的金属检针要求。</td>
+        </tr>
+        <tr>
+          <td>设备校准</td>
+          <td>验针机需定期用标准测试片进行校准。</td>
+        </tr>
+        <tr>
+          <td>不能过的处理</td>
+          <td>不能通过时必须提前上报（开发阶段或大货初期），与 QA / 买手讨论解决方案。</td>
+        </tr>
+      </table>
+      <div class="note">
+        禁止做法：工厂或个人私下“约定”不过验针也照常出货，并要求 AQC 在报告中不写；一旦被 BSQC 抽检发现，货和 AQC 的信誉都会受到严重影响。
+      </div>
+
+      <h3>2. 物理测试</h3>
+      <ul>
+        <li>报告格式可使用工厂 / 第三方自己的模板，不强制统一。</li>
+        <li>AQC 至少要能看懂报告中哪些项目合格、哪些不合格。</li>
+        <li>克重公差培训口径约为：<strong>±5%</strong> 左右（以具体标准为准）。</li>
+      </ul>
+
+      <h3>3. 人台穿着与拍照注意事项</h3>
+      <ul>
+        <li>外套拍照时，人台最好里面穿一件薄内搭（T 恤 / 衬衫），不要“光膀子穿外套”。</li>
+        <li>Jack & Jones / JJXX：必须使用对应品牌人台，没有就写“不适用”，不要用其他品牌人台代替。</li>
+        <li>其他品牌：有 BS 人台则使用；没有可以不拍人台照片。</li>
+      </ul>
+
+      <h3>4. 拷贝纸使用</h3>
+      <ul>
+        <li>大多数情况不强制一件一张。</li>
+        <li>对于纽扣、腰带可能压出痕迹的款式，建议使用拷贝纸隔开或包住关键部位。</li>
+      </ul>
+    </section>
+
+    <!-- 十一、自检报告填写 -->
+    <section id="sec11" class="section">
+      <h2>十一、AQC 自检报告与系统操作 <span class="badge">Qualma / 系统</span></h2>
+      <ul>
+        <li>系统只允许两种检验结论：<span class="pill pill-success">合格</span> / <span class="pill pill-danger">不合格</span>，没有“待定”选项。</li>
+        <li>报告需要真实、清晰地反映发现的问题，并尽量提出合理建议或处理意见。</li>
+        <li>尺寸数据、缺点计数等内容，在上传前必须认真自查，一旦提交不能修改或撤回。</li>
+        <li>照片要尽量清楚、完整地反映问题或整体效果，注意人台穿着规范。</li>
+      </ul>
+      <div class="note">
+        <strong>★ 要点：</strong>报告是后续追责和复盘的重要依据，要让“没到现场的人也能看懂现场发生了什么”。
+      </div>
+    </section>
+
+    <!-- 十二、产前会与质量手册 -->
+    <section id="sec12" class="section">
+      <h2>十二、产前会（PP Meeting）与质量手册 <span class="badge">过程控制</span></h2>
+      <h3>1. 产前会参加人员</h3>
+      <table>
+        <tr>
+          <th>类型</th>
+          <th>示例</th>
+        </tr>
+        <tr>
+          <td>工厂生产管理层</td>
+          <td>生产经理、车间主管等。</td>
+        </tr>
+        <tr>
+          <td>品质相关人员</td>
+          <td>工厂 QC / QA、面辅料验收负责人。</td>
+        </tr>
+        <tr>
+          <td>外贸公司</td>
+          <td>业务、跟单。</td>
+        </tr>
+        <tr>
+          <td>必要时</td>
+          <td>BS QA、技术支持人员。</td>
+        </tr>
+      </table>
+
+      <h3>2. 产前会两个核心目的</h3>
+      <ol>
+        <li><strong>回顾准备工作是否完成</strong>：
+          <ul>
+            <li>面料/辅料是否已检验并合格。</li>
+            <li>样衣是否已确认并定版。</li>
+            <li>工艺、版型是否已经明确。</li>
+          </ul>
+        </li>
+        <li><strong>明确各项质量要求</strong>：
+          <ul>
+            <li>外观、做工、尺寸、包装、验针、物理测试等完整讲清楚。</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>3. 质量相关手册</h3>
+      <p>公司有多本与质量相关的手册，例如：</p>
+      <ul>
+        <li>质量手册</li>
+        <li>工艺 / 特良手册</li>
+        <li>安全手册（尤其儿童安全相关）</li>
+        <li>验针 / 金属检测手册</li>
+        <li>包装 / 纸箱规范手册</li>
+      </ul>
+      <div class="note">
+        不记得标准时，优先查手册，再向 QA 咨询；例如布料回潮放松时间是 24h 还是 48h，需要以质量手册为准。
+      </div>
+    </section>
+
+    <!-- 十三、自检流程图 -->
+    <section id="sec13" class="section">
+      <h2>十三、整体 AQC 自检流程（示意图） <span class="badge">流程复盘</span></h2>
+      <div class="flow">
+【接单】
+   ↓（向业务 / 工厂要齐全资料）
+【确认资料】
+   - 原始订单
+   - 最新尺寸表
+   - 样衣 + 锁扣
+   - 面料卡、辅料卡
+   - 物理测试报告
+   ↓
+【检前准备】
+   - 检查工具校准（尺子、验针机、湿度计）
+   - 了解包装方式 & 箱规
+   ↓
+【抽箱】
+   - AQC 自己随机抽箱
+   - 覆盖所有 色 × 码
+   - 数量多 → 多抽
+   ↓
+【现场检验】
+   - 外观做工（按缺点分类：Critical / Major / Minor）
+   - 尺寸测量（按品牌要求执行）
+   - 验针、称重、湿度、防霉措施
+   ↓
+【记录 & 拍照】
+   - 问题拍清楚
+   - 数据录入系统
+   ↓
+【出结论】
+   - 按 AQL 判定：合格 / 不合格
+   - 重大问题同步工厂 + 自家领导 + BS QA
+      </div>
+
+      <div class="note">
+        建议将本页作为考前复习的主框架，根据自己薄弱的章节（如缺点分类、包装、AQL、验针等）分别回看细节。
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
