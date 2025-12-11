@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>留学科学选校选专业 · 实用网页版指南</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --bg-card: #ffffff;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.08);
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-subtle: #e5e7eb;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: linear-gradient(135deg, #eef2ff 0%, #f9fafb 40%, #eff6ff 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* 顶部标题区 */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at top left, #dbeafe, #eff6ff);
+      border-radius: 28px;
+      padding: 26px 22px 22px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent);
+      opacity: 0.6;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .hero-pill {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.85);
+      color: #4b5563;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    /* 导航 */
+    .nav {
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+      margin-bottom: 18px;
+    }
+
+    .nav-inner {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: 6px 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .nav a {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #4b5563;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+
+    .nav a span {
+      opacity: 0.7;
+      margin-right: 4px;
+    }
+
+    .nav a:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .nav a.nav-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+    }
+
+    .nav a.nav-primary:hover {
+      background: #2563eb;
+    }
+
+    /* 布局：内容+侧栏 */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* 卡片与内容标题 */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: 18px 18px 16px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .section-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0 0 12px;
+    }
+
+    .pill-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .pill-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #1d4ed8;
+    }
+
+    /* 列表和高亮块 */
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    .list li {
+      margin-bottom: 6px;
+    }
+
+    .highlight-box {
+      background: #f9fafb;
+      border-radius: var(--radius-lg);
+      padding: 10px 12px;
+      border: 1px dashed var(--border-subtle);
+      font-size: 12px;
+      color: #4b5563;
+      margin-top: 8px;
+    }
+
+    .highlight-box strong {
+      color: #111827;
+    }
+
+    .columns-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .columns-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mini-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 8px 0 4px;
+    }
+
+    .label-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #ecfdf3;
+      color: #15803d;
+      margin-bottom: 6px;
+    }
+
+    .label-chip span {
+      font-size: 14px;
+    }
+
+    /* 时间线 */
+    .timeline {
+      position: relative;
+      margin-top: 6px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(to bottom, #bfdbfe, #93c5fd);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 5px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    }
+
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0 0 4px;
+    }
+
+    .timeline-body {
+      margin: 0;
+      font-size: 12px;
+      color: #4b5563;
+    }
+
+    /* 右侧速览卡片 */
+    .side-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+      color: #4b5563;
+    }
+
+    .checklist li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .checklist li::before {
+      content: "✓";
+      font-size: 11px;
+      margin-top: 2px;
+      color: #16a34a;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .tag-cloud span {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+
+    .note-box {
+      font-size: 11px;
+      color: #4b5563;
+      background: #fffbeb;
+      border: 1px solid #fbbf24;
+      padding: 8px 10px;
+      border-radius: var(--radius-lg);
+      margin-top: 10px;
+    }
+
+    /* RIASEC 区块 */
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .badge-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .riasec-pill {
+      background: #eff6ff;
+      border-radius: 999px;
+      padding: 6px 8px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border: 1px solid #dbeafe;
+    }
+
+    .riasec-pill strong {
+      font-size: 12px;
+      color: #1d4ed8;
+    }
+
+    .riasec-pill span {
+      color: #4b5563;
+    }
+
+    .riasec-step-list {
+      font-size: 12px;
+      margin: 6px 0 0;
+      padding-left: 16px;
+      color: #374151;
+    }
+
+    .riasec-step-list li {
+      margin-bottom: 4px;
+    }
+
+    /* 回到顶部按钮 */
+    .back-top {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      background: #1f2937;
+      color: white;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      opacity: 0.9;
+      display: none;
+      align-items: center;
+      gap: 4px;
+      z-index: 40;
+    }
+
+    .back-top.show {
+      display: inline-flex;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- 顶部 -->
+    <header class="hero" id="top">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        留学规划 · 科学决策版
+      </div>
+      <h1 class="hero-title">从上海国际学校到世界大学：一套可以直接照着做的科学留学流程</h1>
+      <p class="hero-sub">
+        核心思路只有一句话：先搞清楚“我是谁”，再根据兴趣、能力、价值观和现实约束，按顺序选择国家 → 专业 → 大学，同时给未来第一份工作提前铺好路。
+      </p>
+      <div class="hero-pill-row">
+        <div class="hero-pill">人–环境匹配（Person–Environment Fit）</div>
+        <div class="hero-pill">专业影响收入，但不是全部</div>
+        <div class="hero-pill">职业是动态的，不是一次选定一辈子</div>
+      </div>
+    </header>
+
+    <!-- 导航 -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="#overview" class="nav-primary"><span>●</span>整体框架</a>
+        <a href="#principles"><span>1</span>三个科学原则</a>
+        <a href="#step1"><span>2</span>Step 1 自我画像</a>
+        <a href="#step2"><span>3</span>Step 2 选国家</a>
+        <a href="#step3"><span>4</span>Step 3 选专业</a>
+        <a href="#step4"><span>5</span>Step 4 选大学</a>
+        <a href="#step5"><span>6</span>Step 5 第一份工作</a>
+        <a href="#timeline"><span>7</span>一年时间线</a>
+        <a href="#riasec"><span>R</span>RIASEC兴趣匹配</a>
+      </div>
+    </nav>
+
+    <div class="layout">
+      <!-- 主内容 -->
+      <main>
+        <!-- 总览 -->
+        <section class="card" id="overview">
+          <h2 class="section-title">
+            <span class="section-badge">0</span>
+            整体框架：一图看懂留学决策路径
+          </h2>
+          <p class="section-sub">
+            把留学决策拆开，你要依次解决五个问题：我是谁 → 去哪里 → 学什么 → 上哪所大学 → 大学期间如何为第一份工作铺路。
+          </p>
+
+          <div class="columns-2">
+            <div>
+              <p class="mini-title">决策顺序（建议你按这个顺序往下看）</p>
+              <ol class="list">
+                <li><strong>自我画像：</strong>把兴趣、能力、价值观、现实约束写清楚。</li>
+                <li><strong>选国家：</strong>用语言&学制 → 专业优势 → 钱&签证&就业三层过滤。</li>
+                <li><strong>选专业：</strong>用“兴趣 × 能力 × 回报”的三角模型找方向。</li>
+                <li><strong>选大学：</strong>看专业实力、学习体验、城市&成本、就业&校友。</li>
+                <li><strong>职业铺垫：</strong>提前思考第一份工作，规划实习和项目。</li>
+              </ol>
+            </div>
+            <div>
+              <p class="mini-title">核心原则（记在脑子里，防止走偏）</p>
+              <ul class="list">
+                <li><strong>适配度 &gt; 排名：</strong>越符合你的人格和兴趣，你越容易开心又优秀。</li>
+                <li><strong>专业影响收入，但不是全部：</strong>在财务安全范围内选你更投入的方向。</li>
+                <li><strong>职业是动态的：</strong>目标是选一个“对现在足够好、对未来有弹性”的起点。</li>
+              </ul>
+              <div class="highlight-box">
+                <strong>一句话总结：</strong>不要盲目追“最牛”，而是追“最适合你、还能给未来留余地”的组合。
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 原则 -->
+        <section class="card" id="principles">
+          <h2 class="section-title">
+            <span class="section-badge">1</span>
+            三个科学原则：用研究给决策兜底
+          </h2>
+          <p class="section-sub">
+            这些原则来自职业心理学和教育经济学研究，用来防止你被“排名、鸡血文章、短视频”带偏。
+          </p>
+
+          <div class="mini-title">原则一：人–环境匹配，比“名气”更重要</div>
+          <ul class="list">
+            <li>当你的<strong>兴趣、价值观、能力</strong>与学习/工作环境越匹配，你越容易满意、稳定、表现好。</li>
+            <li>过度追求名校/热门专业，而忽视适配度，常见结果是：不开心、转专业、换学校、毕业后痛苦转行。</li>
+          </ul>
+          <div class="highlight-box">
+            <strong>实用翻译：</strong>选校选专业别只问“哪里最高级”，要多问一句“我放进去，真的会舒服、会发光吗？”
+          </div>
+
+          <div class="mini-title" style="margin-top:10px;">原则二：专业对收入很重要，但不是唯一决定因素</div>
+          <ul class="list">
+            <li>不同专业平均收入和就业率差异确实很大（工科/CS/部分商科整体更高）。</li>
+            <li>但<strong>专业和最后工作内容的匹配度</strong>同样重要：学了高薪专业却去做完全无关的工作，专业优势会打折。</li>
+          </ul>
+
+          <div class="mini-title" style="margin-top:10px;">原则三：职业是“动态系统”，不是“一锤定音”</div>
+          <ul class="list">
+            <li>人生中换专业、换行业、换国家很常见，重点是你有没有积累一些<strong>可迁移的能力和资源</strong>。</li>
+            <li>因此，现在的目标不是选一个“绝对正确的专业”，而是选一个：当前适配 + 未来可调整的起点。</li>
+          </ul>
+        </section>
+
+        <!-- Step 1 -->
+        <section class="card" id="step1">
+          <h2 class="section-title">
+            <span class="section-badge">2</span>
+            Step 1：做一份“自我画像”（A4 纸搞清楚你是谁）
+          </h2>
+          <p class="section-sub">
+            不要一上来就查排名。先用一张 A4 纸，把下面四件事写清楚，这会成为后面所有选择的“对照表”。
+          </p>
+
+          <div class="columns-2">
+            <div>
+              <div class="mini-title">① 兴趣（你愿意长期花时间钻研什么）</div>
+              <ul class="list">
+                <li>回想你最“忘记时间”的时刻：写代码？做实验？画画？组织活动？演讲？做表格？</li>
+                <li>列出一份清单：<strong>“就算没人逼我，我也会持续做的事”</strong>。</li>
+                <li>可以参考 RIASEC 六维模型（文后有专门一节）。</li>
+              </ul>
+
+              <div class="mini-title">② 能力和学科优势</div>
+              <ul class="list">
+                <li>看最近 3–4 年：哪几门课你普遍稳定发挥？有没有竞赛/项目里别人依赖你的点？</li>
+                <li>关注：定量能力、语言能力、写作、空间想象、领导力、执行力等。</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="mini-title">③ 价值观和生活偏好</div>
+              <ul class="list">
+                <li>更看重：稳定 vs 高风险高回报？</li>
+                <li>更想要：大城市机会多 vs 节奏相对慢一点？</li>
+                <li>愿意为事业拼多久？工作和生活的平衡怎么排？</li>
+              </ul>
+
+              <div class="mini-title">④ 现实约束</div>
+              <ul class="list">
+                <li>家庭预算（决定国家区间、奖学金策略）。</li>
+                <li>语言情况（只用英语，还是接受非英语国家）。</li>
+                <li>更想：毕业后回国发展，还是尝试长期留在海外？</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <strong>建议：</strong>真的拿一张 A4 纸写下来，后面每一个决定（国家 / 专业 / 学校）都拿这张纸对照：这是不是更靠近“我”，还是只是更靠近“别人觉得好”？
+          </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="card" id="step2">
+          <h2 class="section-title">
+            <span class="section-badge">3</span>
+            Step 2：选国家——用“过滤器”筛出 2–3 个主战场
+          </h2>
+          <p class="section-sub">
+            选国家不要从“哪个国家更牛”开始，而要从语言&学制 → 专业–国家匹配 → 钱&签证&就业 三层过滤。
+          </p>
+
+          <div class="mini-title">第 1 层：按语言和学制过滤</div>
+          <ul class="list">
+            <li><strong>英语国家：</strong>美 / 英 / 加 / 澳 / 新 / 新加坡等。
+              <ul class="list">
+                <li>优点：英语学习成本低，信息多，就业面广。</li>
+                <li>美国：4 年，本科换专业弹性大；英国/新加坡：多为 3 年，专业较早锁定。</li>
+              </ul>
+            </li>
+            <li><strong>非英语但英语授课多的国家：</strong>荷兰、德国、北欧等。
+              <ul class="list">
+                <li>优点：部分学费较低，生活体验不一样。</li>
+                <li>要求：对当地文化和语言适应能力更强，自理能力要好。</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="mini-title" style="margin-top:10px;">第 2 层：按“专业–国家生态”过滤</div>
+          <ul class="list">
+            <li><strong>美国：</strong>CS、工程、商科、科研型专业整体生态强，跨学科机会多。</li>
+            <li><strong>英国：</strong>金融、商科、法律、传媒等集中，课程紧凑。</li>
+            <li><strong>加拿大/澳洲：</strong>综合压力略低，部分地区移民政策相对友好。</li>
+            <li><strong>新加坡/香港：</strong>离中国近，金融/商科/CS 都不错，亚洲网络强。</li>
+          </ul>
+          <div class="highlight-box">
+            <strong>思考顺序：</strong>先大概有个专业方向 → 再看这个方向在哪些国家<strong>“产业 + 大学 + 就业”整体更友好</strong>。
+          </div>
+
+          <div class="mini-title" style="margin-top:10px;">第 3 层：钱、签证、就业三个现实指标</div>
+          <ul class="list">
+            <li><strong>总成本：</strong>学费 + 生活费 + 汇率波动风险。</li>
+            <li><strong>签证 & 留任政策：</strong>毕业后工作签证长短、续签难度。</li>
+            <li><strong>就业市场：</strong>城市是否聚集你目标行业？实习机会多不多？</li>
+          </ul>
+
+          <div class="highlight-box">
+            <strong>最后产出：</strong>筛出<strong>2–3 个重点国家 + 1 个备选国家</strong>，并简单写下：为什么它适合你？主要风险是什么？
+          </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="card" id="step3">
+          <h2 class="section-title">
+            <span class="section-badge">4</span>
+            Step 3：选专业——“兴趣 × 能力 × 回报”的三角模型
+          </h2>
+          <p class="section-sub">
+            好专业的标准不是“最火”，而是：你有兴趣、你有一定能力、同时在财务上不至于太亏。
+          </p>
+
+          <div class="columns-2">
+            <div>
+              <div class="mini-title">① 先选“专业大类”，不用一开始就锁细分方向</div>
+              <ul class="list">
+                <li><strong>理工 & 计算机：</strong>CS、Data Science、EE、数学、统计等。</li>
+                <li><strong>商科 & 经济：</strong>经济、金融、会计、市场、管理等。</li>
+                <li><strong>社科：</strong>心理、政治学、社会学、国际关系等。</li>
+                <li><strong>人文 & 传媒：</strong>文学、历史、哲学、传媒、新闻等。</li>
+                <li><strong>艺术 & 设计：</strong>纯艺、设计、建筑等。</li>
+              </ul>
+              <div class="highlight-box">
+                现在阶段，你只需要挑出<strong>2–3 个你“有兴趣且不太拉胯”的大类</strong>，作为重点探索对象。
+              </div>
+            </div>
+
+            <div>
+              <div class="mini-title">② 把“钱”纳入考虑，但不让它独裁</div>
+              <ul class="list">
+                <li>工科 / CS / 部分商科平均收入和就业率更高，属于普遍规律。</li>
+                <li>部分专业起薪一般但后期增速快（如需要高学历的研究类方向）。</li>
+                <li><strong>推荐策略：</strong>
+                  <ul class="list">
+                    <li>排除极难就业又非常烧钱、你也没有极强热爱的方向。</li>
+                    <li>在剩下“财务安全区”的专业中，优先你更有兴趣 + 更有优势的。</li>
+                    <li>必要时考虑<strong>主修 + 副修 / 双专业</strong>，在风险和兴趣之间平衡。</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mini-title" style="margin-top:8px;">③ 多接触真实世界：和“这个专业的人”聊聊</div>
+          <ul class="list">
+            <li>找<strong>学长学姐</strong>（尤其是同类型学校出去的），问：
+              <ul class="list">
+                <li>你们平时在学什么？作业/项目是什么类型？</li>
+                <li>和你原来想象的这个专业，有什么差别？</li>
+              </ul>
+            </li>
+            <li>找已经工作的前辈，问：
+              <ul class="list">
+                <li>工作日常是什么？你大学专业帮了你多少？</li>
+                <li>回到高中，你会怎么选？</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Step 4 -->
+        <section class="card" id="step4">
+          <h2 class="section-title">
+            <span class="section-badge">5</span>
+            Step 4：选大学——不迷信一个排名，而看多维“适配度”
+          </h2>
+          <p class="section-sub">
+            真正影响体验的不只是“是不是名校”，还有专业实力、课堂体验、城市、成本、校友网络等很多维度。
+          </p>
+
+          <div class="columns-2">
+            <div>
+              <div class="mini-title">① 关键维度</div>
+              <ul class="list">
+                <li><strong>专业实力：</strong>看目标专业的老师、研究、课程设置、行业合作项目。</li>
+                <li><strong>学习体验：</strong>班级多大？是否重视讨论和项目？对国际生的支持怎么样？</li>
+                <li><strong>城市 & 生活成本：</strong>大城市机会多但贵；小城学习环境安静但要更主动找机会。</li>
+                <li><strong>就业与校友：</strong>毕业去向（行业、薪资、读研比例）、校友在你感兴趣行业是否活跃。</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="mini-title">② 冲刺 / 匹配 / 保底：组合策略</div>
+              <ul class="list">
+                <li><strong>冲刺：</strong>你有希望但不稳的学校 2–4 所。</li>
+                <li><strong>匹配：</strong>和你成绩/背景比较匹配的 4–6 所（你愿意去）。</li>
+                <li><strong>保底：</strong>非常有把握录取、你也能接受读的 2–4 所。</li>
+              </ul>
+              <div class="highlight-box">
+                <strong>小技巧：</strong>为每所学校写一句话“我为什么要申请它”，能明显提高你文书的说服力，也帮你过滤掉“只是因为别人都申”的选项。
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 5 -->
+        <section class="card" id="step5">
+          <h2 class="section-title">
+            <span class="section-badge">6</span>
+            Step 5：别忘了“第一份工作”——大学阶段要提前布局
+          </h2>
+          <p class="section-sub">
+            研究表明，毕业后第一份工作的行业和质量，会对后面几年的收入和发展产生很大影响。你现在就可以把这个考虑进选校和大学规划里。
+          </p>
+
+          <div class="columns-2">
+            <div>
+              <div class="mini-title">① 选国家 / 学校时要问的就业问题</div>
+              <ul class="list">
+                <li>学校所在城市，是否有你感兴趣的行业总部或分部？</li>
+                <li>学校的职业发展中心是否有：
+                  <ul class="list">
+                    <li>企业宣讲会 / 校园招聘？</li>
+                    <li>实习和项目机会信息？</li>
+                    <li>简历和面试辅导？</li>
+                  </ul>
+                </li>
+                <li>专业是否提供<strong>实习 / Co-op 项目 / 行业合作课题</strong>？</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="mini-title">② 上大学后的策略（提前想好）</div>
+              <ul class="list">
+                <li>大一：适应环境 + 修好基础课 + 加 1–2 个有含金量的社团/项目。</li>
+                <li>大二：开始找<strong>相关方向的小实习、科研、项目</strong>，补充技能（编程、写作、数据分析等）。</li>
+                <li>大三：冲刺核心实习，争取能转正或拿到 full-time offer。</li>
+              </ul>
+              <div class="highlight-box">
+                <strong>思考题：</strong>如果你已经在某个国家和专业读完大一，你打算怎样利用大二、大三为“第一份工作”做准备？提前把这条路径画出来。
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section class="card" id="timeline">
+          <h2 class="section-title">
+            <span class="section-badge">7</span>
+            一年行动时间线：直接照着做的“实用版流程”
+          </h2>
+          <p class="section-sub">
+            假设你离正式申请还有大约 1 年，可以用下面的步骤做整体规划（可以根据你真实年级稍微前后调整）。
+          </p>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="timeline-title">第 0–2 个月：打底阶段（自我画像 + 粗选方向）</h3>
+              <p class="timeline-body">
+                · 写出一份 A4 纸的<strong>自我画像</strong>（兴趣、能力、价值观、现实约束）。<br />
+                · 用 RIASEC 自测，找出你最突出的 2–3 个兴趣类型。<br />
+                · 挑出 2–3 个<strong>专业大类</strong>作为重点候选（例如：CS/数据、商科、心理/社科等）。<br />
+                · 至少和 3 位学长学姐/前辈聊聊他们的专业和国家。
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="timeline-title">第 3–6 个月：筛国家 + 建“大学长名单”</h3>
+              <p class="timeline-body">
+                · 按语言&学制 → 专业–国家生态 → 钱&签证&就业，筛出 2–3 个主申国家 + 1 个备选。<br />
+                · 为每个国家列出 5–8 所<strong>可能大学</strong>，记录：目标专业、录取要求、学费和生活费、城市特点。<br />
+                · 开始系统准备标化成绩（TOEFL/IELTS、SAT/ACT 或 A-Level/IB 成绩等）。<br />
+                · 针对目标专业，有意识地做 1–2 个相关项目/竞赛/活动。
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="timeline-title">第 7–12 个月：定专业 + 确认学校组合 + 打磨“故事线”</h3>
+              <p class="timeline-body">
+                · 根据兴趣 + 能力 + 回报，确定优先顺序：主攻专业 / 备选专业。<br />
+                · 把学校划分为<strong>冲刺 / 匹配 / 保底</strong>三类，形成最终申请清单。<br />
+                · 把你的经历整理成一条清晰的<strong>“故事线”</strong>（我是谁 → 为什么想读这个方向 → 我已经做了什么准备 → 我想在这所学校做什么）。<br />
+                · 开始准备文书草稿、完善活动列表，联系推荐人等。
+              </p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <strong>如何检查自己有没有“跑偏”：</strong>隔 2–3 个月把自己的 A4 自我画像拿出来，对照一下现在的方向是否更接近它，而不是越来越接近“别人觉得最好”的模板答案。
+          </div>
+        </section>
+
+        <!-- RIASEC -->
+        <section class="card" id="riasec">
+          <h2 class="section-title">
+            <span class="section-badge">R</span>
+            RIASEC 六维兴趣模型：帮你看清“适合我的环境”
+          </h2>
+          <p class="section-sub">
+            RIASEC 是一套用来描述职业兴趣的模型，可以把人和职业环境都归为 6 种类型。你可以用它来辅助“自我画像”和选专业。
+          </p>
+
+          <div class="badge-grid">
+            <div class="riasec-pill">
+              <strong>R · 现实型</strong>
+              <span>动手派 · 喜欢操作、实物、户外、工具和机器。</span>
+            </div>
+            <div class="riasec-pill">
+              <strong>I · 研究型</strong>
+              <span>思考派 · 爱分析、做题、编程、搞科研，追问“为什么”。</span>
+            </div>
+            <div class="riasec-pill">
+              <strong>A · 艺术型</strong>
+              <span>创意派 · 爱写作、画画、设计、音乐、表达情绪和风格。</span>
+            </div>
+            <div class="riasec-pill">
+              <strong>S · 社会型</strong>
+              <span>帮助派 · 爱教学、辅导、社工、志愿、关心他人感受。</span>
+            </div>
+            <div class="riasec-pill">
+              <strong>E · 企业型</strong>
+              <span>说服派 · 爱带队、谈判、决策、赚钱、影响别人。</span>
+            </div>
+            <div class="riasec-pill">
+              <strong>C · 常规型</strong>
+              <span>组织派 · 爱表格、数据、流程、秩序、稳定和可预测。</span>
+            </div>
+          </div>
+
+          <p class="mini-title" style="margin-top:10px;">在家做一个“半专业版” RIASEC 自评</p>
+          <ol class="riasec-step-list">
+            <li><strong>对 6 类活动打分：</strong>0–5 分评你对每类活动的“喜欢程度”和“擅长程度”。</li>
+            <li><strong>回顾真实经历：</strong>列出 5–10 个你最投入的体验，给每个体验贴上 R/I/A/S/E/C 标签。</li>
+            <li><strong>凑出你的三字码：</strong>综合上面两步，选出最突出的 3 个字母（如 IAS / SEC），后面选专业时优先考虑和这几类气质相近的环境。</li>
+          </ol>
+
+          <div class="highlight-box">
+            <strong>用法提示：</strong>RIASEC 不是给你“判死刑”，而是帮你看清自己更容易舒服和发光的环境。选专业时，你可以问一句：“这个方向的日常，是不是充满我高分的那几种活动？”
+          </div>
+        </section>
+      </main>
+
+      <!-- 侧栏 -->
+      <aside>
+        <section class="card">
+          <h3 class="side-card-title">3 个“随时自检”的问题</h3>
+          <ul class="checklist">
+            <li>这个选择（国家 / 专业 / 学校）和我的<strong>自我画像</strong>一致吗？</li>
+            <li>它能在财务上给我一个<strong>基本安全线</strong>吗？</li>
+            <li>它为未来的<strong>调整和转向</strong>留下空间了吗？</li>
+          </ul>
+          <div class="note-box">
+            如果这三个问题你能都回答“是”，那基本就是一个“足够好”的选择。
+          </div>
+        </section>
+
+        <section class="card">
+          <h3 class="side-card-title">自我画像 Checklist</h3>
+          <ul class="checklist">
+            <li>写下 5–8 件你在做时会“忘记时间”的事。</li>
+            <li>标出你过去 3–4 年最稳定的学科和优势。</li>
+            <li>用 3 句话描述你最看重的生活状态。</li>
+            <li>列出所有现实限制：预算、语言、家庭期望等。</li>
+          </ul>
+          <div class="tag-cloud">
+            <span>兴趣</span>
+            <span>能力</span>
+            <span>价值观</span>
+            <span>现实约束</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <h3 class="side-card-title">一天之内可以做的三件小事</h3>
+          <ul class="checklist">
+            <li>拿一张 A4 纸写出你的初版自我画像。</li>
+            <li>用 RIASEC 六维给自己做一个粗略打分。</li>
+            <li>给一位你欣赏的学长学姐发消息，约一个线上/线下聊专业和国家。</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <!-- 回到顶部按钮 -->
+  <button class="back-top" id="backTopBtn" type="button">
+    ↑ 回到顶部
+  </button>
+
+  <script>
+    const backTopBtn = document.getElementById("backTopBtn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 240) {
+        backTopBtn.classList.add("show");
+      } else {
+        backTopBtn.classList.remove("show");
+      }
+    });
+
+    backTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
