@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSB | 个性化护肤方案书</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --accent-dark: #2980b9;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #c0392b;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-light: #7f8c8d;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: transparent;
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.1) 60%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .user-meta {
+            margin-top: 15px;
+            font-size: 14px;
+            display: flex;
+            gap: 20px;
+            opacity: 0.9;
+            font-family: monospace;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .card-title span.icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Priority Section */
+        .priority-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .priority-grid { grid-template-columns: 1fr; }
+        }
+
+        .priority-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .priority-box strong { display: block; margin-bottom: 8px; color: var(--text-light); font-size: 12px; text-transform: uppercase;}
+        .priority-item { margin-bottom: 5px; font-weight: 600; }
+        .priority-item.highlight { color: var(--accent); }
+
+        /* VISIA Bars */
+        .visia-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .visia-label { width: 120px; font-weight: 500; }
+        .visia-bar-bg { flex: 1; height: 8px; background: #eee; border-radius: 4px; margin: 0 15px; overflow: hidden; }
+        .visia-bar-fill { height: 100%; background: var(--primary); border-radius: 4px; }
+        .visia-score { width: 40px; text-align: right; font-weight: 700; color: var(--primary); font-family: monospace; }
+        
+        .score-low .visia-bar-fill { background: var(--danger); }
+        .score-mid .visia-bar-fill { background: var(--warning); }
+        .score-high .visia-bar-fill { background: var(--success); }
+
+        /* Routine Timeline */
+        .routine-step {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+        }
+        .routine-step:last-child { border-bottom: none; }
+        .step-num { 
+            background: var(--primary); 
+            color: white; 
+            width: 24px; 
+            height: 24px; 
+            border-radius: 50%; 
+            text-align: center; 
+            line-height: 24px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            margin-right: 15px; 
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .step-content strong { color: var(--primary); font-size: 15px; }
+        .step-desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .step-tag { 
+            display: inline-block; 
+            background: #e1f5fe; 
+            color: var(--accent-dark); 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            font-size: 11px; 
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Roadmap */
+        .roadmap-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .roadmap-phase {
+            flex: 1;
+            min-width: 200px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-top: 4px solid #ccc;
+        }
+        .roadmap-phase.active {
+            background: #fff;
+            border-top-color: var(--success);
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.1);
+            border: 1px solid var(--success);
+            border-top-width: 4px;
+        }
+        .phase-title { font-weight: 700; margin-bottom: 5px; display: block; }
+        .phase-time { font-size: 12px; color: var(--text-light); display: block; margin-bottom: 10px; }
+        .phase-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
+        .phase-list li { margin-bottom: 5px; position: relative; padding-left: 15px; }
+        .phase-list li::before { content: '•'; position: absolute; left: 0; color: var(--accent); }
+
+        /* Checklist */
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .checklist-box {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--text-light);
+            border-radius: 4px;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        .warning-title { font-weight: 700; display: block; margin-bottom: 5px; display: flex; align-items: center;}
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="header">
+        <h1>Personal Skin Board</h1>
+        <div class="subtitle">私人皮肤专家委员会 · 定制方案书</div>
+        <div class="user-meta">
+            <span>USER: 32/F</span>
+            <span>TYPE: 混合偏干/黄褐斑</span>
+            <span>LOC: 上海/冬</span>
+            <span>PHASE: 1</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="icon">🎯</span> 双重优先级校准</div>
+        <div class="priority-grid">
+            <div class="priority-box">
+                <strong>你的主诉 (User Priority)</strong>
+                <div class="priority-item">1. 黄褐斑严重</div>
+                <div class="priority-item">2. 毛孔粗大</div>
+                <div class="priority-item">3. 肤色暗黄</div>
+            </div>
+            <div class="priority-box" style="background-color: #e1f5fe;">
+                <strong>专家策略 (Expert Priority)</strong>
+                <div class="priority-item highlight">1. 严格光防护 (防晒)</div>
+                <div class="priority-item highlight">2. 屏障保湿 + 抗氧</div>
+                <div class="priority-item highlight">3. 温和抑制色素</div>
+            </div>
+        </div>
+        <p style="font-size: 13px; color: #666; margin-top: 15px; margin-bottom: 0;">
+            <span style="background:#333; color:#fff; padding:2px 6px; border-radius:4px; font-size:11px;">EXPERT NOTE</span> 
+            对于黄褐斑，"不防晒"等于裸奔。目前的方案完全缺失防护，这是斑点"严重"的主因。必须先建立光防护墙，才能谈后续的淡斑。
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="icon">🔍</span> 皮肤维度透视 (VISIA 模拟)</div>
+        
+        <div class="visia-item score-mid">
+            <span class="visia-label">红色区 (炎症)</span>
+            <div class="visia-bar-bg"><div class="visia-bar-fill" style="width: 60%"></div></div>
+            <span class="visia-score">3.0</span>
+        </div>
+        <div class="visia-item score-low">
+            <span class="visia-label">棕色斑 (色沉)</span>
+            <div class="visia-bar-bg"><div class="visia-bar-fill" style="width: 30%"></div></div>
+            <span class="visia-score">1.5</span>
+        </div>
+        <div class="visia-item score-low">
+            <span class="visia-label">纹理 (细腻度)</span>
+            <div class="visia-bar-bg"><div class="visia-bar-fill" style="width: 50%"></div></div>
+            <span class="visia-score">2.5</span>
+        </div>
+        <div class="visia-item score-high">
+            <span class="visia-label">紫质 (出油)</span>
+            <div class="visia-bar-bg"><div class="visia-bar-fill" style="width: 80%"></div></div>
+            <span class="visia-score">4.0</span>
+        </div>
+        
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 13px; color: #555;">
+            <strong>📸 照片观察速写：</strong>
+            颧骨处有成片褐色斑块（疑似黄褐斑/晒斑），整体呈现典型的“疲惫肌”与压力型暗沉。T区出油不明显，毛孔问题更多源于缺水老化。
+        </div>
+    </div>
+
+    <div class="card" style="border-left-color: var(--success);">
+        <div class="card-title"><span class="icon">🧴</span> Phase 1：防护与激活期 (Current)</div>
+        <p style="font-size: 14px; margin-bottom: 20px;">
+            <strong>周期目标：</strong>从"0防晒"到"每日防晒"，温和去黄。建议执行 4-6 周。
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            
+            <div>
+                <h3 style="font-size: 16px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 15px; color: var(--accent);">☀️ 早上 Routine</h3>
+                
+                <div class="routine-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>清水 或 氨基酸洁面</strong>
+                        <div class="step-desc">保留适度皮脂膜，防止干纹。</div>
+                    </div>
+                </div>
+
+                <div class="routine-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>抗氧提亮精华</strong>
+                        <div class="step-desc">含VC衍生物/烟酰胺。中和自由基，针对暗黄。</div>
+                        <span class="step-tag">去黄关键</span>
+                    </div>
+                </div>
+
+                <div class="routine-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>滋润型防晒霜 (SPF30+)</strong>
+                        <div class="step-desc">必须足量。这是淡斑最核心的一步。</div>
+                        <span class="step-tag" style="background:#ffebee; color:#c62828;">不可省略</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="font-size: 16px; border-bottom: 2px solid var(--primary); padding-bottom: 8px; margin-bottom: 15px; color: var(--primary);">🌙 晚上 Routine</h3>
+                
+                <div class="routine-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>温和卸妆/洁面</strong>
+                        <div class="step-desc">卸妆油或洁颜蜜。洗去防晒，不堵毛孔。</div>
+                    </div>
+                </div>
+
+                <div class="routine-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>美白淡斑精华</strong>
+                        <div class="step-desc">含377/光甘草定等。先局部涂斑点，后全脸。</div>
+                        <span class="step-tag">抑黑关键</span>
+                    </div>
+                </div>
+
+                <div class="routine-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>乳液 + 护肤油 (可选)</strong>
+                        <div class="step-desc">适乐肤不够润时，加1-2滴油混合，增强封闭。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="icon">🗺️</span> 动态护肤路线图</div>
+        <div class="roadmap-container">
+            <div class="roadmap-phase active">
+                <span class="phase-title">Phase 1: 防护与适应</span>
+                <span class="phase-time">第 1 - 6 周 (进行中)</span>
+                <ul class="phase-list">
+                    <li>建立每日防晒习惯</li>
+                    <li>温和引入抗氧去黄</li>
+                    <li>皮肤不再紧绷干燥</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase">
+                <span class="phase-title">Phase 2: 攻坚淡斑</span>
+                <span class="phase-time">第 7 - 16 周</span>
+                <ul class="phase-list">
+                    <li>引入强效美白剂(377/间苯二酚)</li>
+                    <li>视情况加低浓度A醇</li>
+                    <li>目标：斑点边缘模糊</li>
+                </ul>
+            </div>
+            <div class="roadmap-phase">
+                <span class="phase-title">Phase 3: 长期维稳</span>
+                <span class="phase-time">第 16 周以后</span>
+                <ul class="phase-list">
+                    <li>内调抗炎 + 硬防晒</li>
+                    <li>防止黄褐斑复发</li>
+                    <li>维持皮肤通透度</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="icon">🧬</span> 生活方式微调 (The Invisible Skincare)</div>
+        <table style="margin:0;">
+            <tr>
+                <td width="30%"><strong>🥗 饮食</strong></td>
+                <td><strong>抗炎 + 控糖</strong>。少甜食油炸，多吃熟番茄/深色蔬菜。糖化是皮肤发黄的主因。</td>
+            </tr>
+            <tr>
+                <td><strong>🏠 环境</strong></td>
+                <td><strong>加湿 + 物理遮挡</strong>。办公室开加湿器；上下班即使10分钟也要打伞/戴帽。</td>
+            </tr>
+            <tr>
+                <td><strong>🧘‍♀️ 压力</strong></td>
+                <td><strong>睡前远离手机</strong>。皮质醇(压力激素)是黄褐斑的重要推手。</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="icon">📆</span> 里程碑与风险提示</div>
+        
+        <div style="margin-bottom: 20px;">
+            <div class="checklist-item">
+                <div class="checklist-box"></div>
+                <div><strong>短期 (2-4周)</strong>：早起洗脸手感变软，不再粗糙；下午暗沉减轻。</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-box"></div>
+                <div><strong>中期 (8-12周)</strong>：两颊斑块颜色变浅，粉底更易遮盖；毛孔视觉变小。</div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <span class="warning-title">⚠️ 风险提示：切勿急于求成</span>
+            <strong>黄褐斑特性：</strong>越刺激越黑。请勿盲目使用高浓度酸类焕肤或去美容院做爆破激光，极大概率反黑。<br>
+            <strong>就医信号：</strong>如斑点突然变深、扩大或伴有红肿，请立即前往三甲医院皮肤科面诊。
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2025 Personal Skin Board AI. 本方案基于用户提供信息生成，不构成医疗诊断建议。
+    </div>
+
+</div>
+
+</body>
+</html>
