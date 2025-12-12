@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>个人护肤行动卡｜Personal Skin Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-elevated: #0b1020;
+      --bg-soft: #151a2c;
+      --accent: #4f8bff;
+      --accent-soft: rgba(79, 139, 255, 0.12);
+      --accent-strong: #8a5cff;
+      --text-main: #f5f7ff;
+      --text-sub: #a9b3d8;
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --danger: #ff5c7a;
+      --success: #45c49c;
+      --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.65);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, #18213a 0, #050816 55%);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+
+    header.hero {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 26px 24px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, #283966 0, #080b18 55%);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 0 0, rgba(121, 162, 255, 0.25), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(184, 115, 255, 0.22), transparent 55%);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(0, 0, 0, 0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-sub);
+    }
+
+    .hero-subtitle {
+      color: var(--text-sub);
+      font-size: 13px;
+      max-width: 640px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    }
+
+    .nav {
+      margin-top: 18px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(3, 8, 24, 0.7);
+      color: var(--text-sub);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .nav-link span.index {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .nav-link:hover {
+      border-color: rgba(144, 182, 255, 0.85);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+    }
+
+    main {
+      margin-top: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    section.section {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(
+          135deg,
+          rgba(79, 139, 255, 0.14),
+          rgba(138, 92, 255, 0.04)
+        ),
+        radial-gradient(circle at top left, rgba(9, 9, 15, 0.9), #050816);
+      padding: 20px 20px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    section.section:nth-of-type(even) {
+      background: linear-gradient(
+          135deg,
+          rgba(34, 197, 163, 0.18),
+          rgba(15, 23, 42, 0.9)
+        );
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-index {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #ffffff, #4f8bff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #020617;
+      box-shadow: 0 0 0 3px rgba(79, 139, 255, 0.35);
+      flex-shrink: 0;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-sub);
+      max-width: 380px;
+      text-align: right;
+    }
+
+    .tag-row {
+      margin-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 228, 0.4);
+      color: var(--text-sub);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    th,
+    td {
+      border: 1px solid rgba(148, 163, 228, 0.35);
+      padding: 8px 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: rgba(15, 23, 42, 0.92);
+      font-weight: 550;
+      font-size: 12px;
+      color: #e5edff;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    tr:nth-child(odd) td {
+      background: rgba(7, 12, 30, 0.95);
+    }
+
+    .priority-table td:first-child,
+    .priority-table th:first-child {
+      width: 90px;
+      white-space: nowrap;
+    }
+
+    .score-bar {
+      display: inline-flex;
+      gap: 2px;
+      align-items: center;
+    }
+
+    .score-block {
+      width: 10px;
+      height: 9px;
+      border-radius: 3px;
+      background: rgba(148, 163, 228, 0.3);
+    }
+
+    .score-block.filled {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    }
+
+    .score-label {
+      margin-left: 6px;
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .checklist {
+      margin-top: 10px;
+      font-size: 13px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .check-item input {
+      margin-top: 3px;
+    }
+
+    .pill-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-sub);
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px dashed rgba(148, 163, 228, 0.5);
+    }
+
+    .pill-note strong {
+      color: #e5edff;
+    }
+
+    .phase-table td:first-child {
+      white-space: nowrap;
+      width: 170px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      max-width: 140px;
+      height: 6px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 228, 0.55);
+      position: relative;
+    }
+
+    .progress-inner {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+
+    .progress-inner.started {
+      transform: scaleX(0.3);
+    }
+
+    .progress-inner.future {
+      transform: scaleX(0);
+    }
+
+    .progress-inner.done {
+      transform: scaleX(1);
+    }
+
+    .list {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    .list li {
+      margin-left: 18px;
+      margin-bottom: 4px;
+    }
+
+    .risk-title {
+      font-weight: 550;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .risk-text {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 5px;
+    }
+
+    .badge-danger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(248, 113, 113, 0.8);
+      color: #fecaca;
+      background: rgba(127, 29, 29, 0.65);
+    }
+
+    .badge-danger span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #fecaca;
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--text-sub);
+      padding: 16px 12px 8px;
+      border-radius: 18px;
+      border: 1px solid rgba(248, 250, 252, 0.1);
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .footer strong {
+      color: #e5edff;
+    }
+
+    @media (max-width: 720px) {
+      header.hero {
+        padding: 20px 18px;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .section-subtitle {
+        text-align: left;
+      }
+      .page {
+        padding-inline: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-content">
+        <div class="hero-title-row">
+          <div class="hero-title">
+            <span>🧬 Personal Skin Board</span>
+            <span class="hero-chip">32 岁 · 混合偏干 · 色斑&暗沉</span>
+          </div>
+          <div class="meta-pill">
+            <span class="meta-dot"></span>
+            <span>Phase 1 · 修护 + 稳色打底期</span>
+          </div>
+        </div>
+        <p class="hero-subtitle">
+          这是一份为你定制的「护肤行动仪表盘」：尽量少动脑，跟着步骤一步步做，
+          同时把淡斑、提亮和毛孔问题放在一个科学、可长期坚持的节奏里。
+        </p>
+        <div class="hero-meta">
+          <div class="meta-pill">
+            <span class="meta-dot"></span>
+            <span>重点：黄褐斑 / 毛孔 / 肤色偏黄</span>
+          </div>
+          <div class="meta-pill">
+            <span class="meta-dot"></span>
+            <span>环境：上海 · 冬季 · 办公室为主</span>
+          </div>
+          <div class="meta-pill">
+            <span class="meta-dot"></span>
+            <span>护肤习惯：早晚极简，只用适乐肤面霜</span>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a href="#priority" class="nav-link">
+            <span class="index">0</span><span>优先级校准</span>
+          </a>
+          <a href="#visia" class="nav-link">
+            <span class="index">1</span><span>皮肤多维评估</span>
+          </a>
+          <a href="#routine" class="nav-link">
+            <span class="index">2</span><span>当下护肤步骤</span>
+          </a>
+          <a href="#roadmap" class="nav-link">
+            <span class="index">3</span><span>三阶段作战地图</span>
+          </a>
+          <a href="#lifestyle" class="nav-link">
+            <span class="index">3.5</span><span>生活方式微调</span>
+          </a>
+          <a href="#milestone" class="nav-link">
+            <span class="index">4</span><span>里程碑打卡</span>
+          </a>
+          <a href="#risk" class="nav-link">
+            <span class="index">5</span><span>风险与替代方案</span>
+          </a>
+          <a href="#clinic" class="nav-link">
+            <span class="index">6</span><span>可选医美方向</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- 0. Priority -->
+      <section class="section" id="priority">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="section-index">0</span>
+            <span>双重优先级校准 · User vs Expert</span>
+          </h2>
+          <p class="section-subtitle">
+            你的直觉优先级：先解决黄褐斑和毛孔；专家优先级：先稳住光老化和肤色，再配合毛孔精修。
+          </p>
+        </div>
+
+        <table class="priority-table">
+          <thead>
+            <tr>
+              <th>视角</th>
+              <th>Top 1</th>
+              <th>Top 2</th>
+              <th>Top 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>你最在意</td>
+              <td>黄褐斑/色斑多 · 严重</td>
+              <td>毛孔粗大 · 严重</td>
+              <td>肤色偏黄、暗沉 · 严重</td>
+            </tr>
+            <tr>
+              <td>专家优先</td>
+              <td>光防护 + 黄褐斑稳定</td>
+              <td>整体提亮与抗暗沉</td>
+              <td>毛孔粗大与肤质细腻度</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="pill-note">
+          你把黄褐斑放在第一位和专业判断完全一致，是很敏锐的直觉。区别在于第二第三位：从皮肤机制看，肤色暗沉和黄褐斑共享很多成因（紫外线、慢性炎症、睡眠），通常会一起改善；
+          毛孔粗大则更多和油脂、角质代谢、轻度松弛相关，所以会稍微后置，在屏障稳住后配合处理。
+        </p>
+      </section>
+
+      <!-- 1. VISIA -->
+      <section class="section" id="visia">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="section-index">1</span>
+            <span>皮肤维度深度透视 · VISIA 模拟</span>
+          </h2>
+          <p class="section-subtitle">
+            1 到 5 分，5 分最好，更适合用来做 4 到 8 周前后的趋势对比，而不是一次性的“好或坏”评判。
+          </p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>核心维度</th>
+              <th>评分/可视化</th>
+              <th>皮肤层级</th>
+              <th>现象解读与关键旁白</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>红色区 · 泛红 / 炎症</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block"></span>
+                  <span class="score-label">4 分 · 屏障整体稳定</span>
+                </div>
+              </td>
+              <td>表皮 / 浅真皮</td>
+              <td>
+                面颊与鼻翼整体不算爱红，仅有轻微色差，说明现在不处于“着火状态”，可以在修护的基础上做温和淡斑，无需进入重度灭火期。
+              </td>
+            </tr>
+            <tr>
+              <td>棕色斑 · 痘印 / 色沉</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block"></span>
+                  <span class="score-block"></span>
+                  <span class="score-block"></span>
+                  <span class="score-label">2 分 · 黄褐斑较突出</span>
+                </div>
+              </td>
+              <td>基底层</td>
+              <td>
+                双颊有多枚大小不一的棕色斑片，形态类似黄褐斑或日晒斑，与紫外线关系紧密，需要长期稳定的防晒加温和淡斑，避免猛药导致反黑。
+              </td>
+            </tr>
+            <tr>
+              <td>纹理 · 粗糙 / 闭口</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block"></span>
+                  <span class="score-label">4 分 · 纹理整体细腻</span>
+                </div>
+              </td>
+              <td>角质层</td>
+              <td>
+                整体肤质较平滑，闭口和颗粒感少，角质代谢状态不错，不需要重度刷酸，只要做低频温和去角质即可，避免拖薄角质层。
+              </td>
+            </tr>
+            <tr>
+              <td>紫质 · 出油 / 黑头</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block"></span>
+                  <span class="score-block"></span>
+                  <span class="score-label">3 分 · 轻度 T 区油光</span>
+                </div>
+              </td>
+              <td>毛囊皮脂腺</td>
+              <td>
+                鼻翼和 T 区有轻微油光和放大毛孔，但不属于油田型痘肌。
+                后续用温和去角质加 T 区清洁面膜即可，不需要大面积猛控油。
+              </td>
+            </tr>
+            <tr>
+              <td>UV 斑 · 潜在光老化</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block filled"></span>
+                  <span class="score-block"></span>
+                  <span class="score-block"></span>
+                  <span class="score-label">3 分 · 中度风险</span>
+                </div>
+              </td>
+              <td>更深层</td>
+              <td>
+                32 岁加黄褐斑主诉，说明过去的光防护大概率不够严，这也是斑和暗沉的底层原因。从现在开始坚持防晒，可以显著减缓斑变深、肤色越来越暗的趋势。
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pill-note">
+          简单说：你的肌肤整体底子不错，主要矛盾是「长年累积的光老化 + 黄褐斑」，再叠加一点睡眠和压力带来的暗沉。
+          所以策略是：先打光防护和修护的基础，在其上温和淡斑，而不是用一堆猛药硬控。
+        </div>
+
+        <h3 style="margin-top:16px;font-size:14px;">照片观察速写 · 补充记录</h3>
+        <ul class="list">
+          <li>T 区与鼻翼：轻微油光，毛孔略放大但不夸张。</li>
+          <li>双颊区域：多枚棕色斑片，边界略模糊，分布偏对称，符合黄褐斑/日晒斑特征。</li>
+          <li>下巴与嘴周：零星小痘印，整体纹理平滑，不是问题核心区域。</li>
+          <li>额头与整体纹理：额头光滑，无明显细纹，仅轻微不均。</li>
+          <li>整体肤色印象：轻度偏黄有点疲惫感，但不是蜡黄，更像睡眠与光老化叠加的暗沉。</li>
+        </ul>
+      </section>
+
+      <!-- 2. Routine -->
+      <section class="section" id="routine">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="section-index">2</span>
+            <span>当前阶段护肤步骤 · Phase 1 执行卡</span>
+          </h2>
+          <p class="section-subtitle">
+            时间轴建议：连续执行约 8 周。若出现明显红痒肿痛，要先停用功能性精华，只保留洁面、保湿和防晒。
+          </p>
+        </div>
+
+        <div class="tag-row">
+          <span class="tag">目标一：稳定黄褐斑</span>
+          <span class="tag">目标二：整体提亮肤色</span>
+          <span class="tag">目标三：兼顾毛孔精修</span>
+        </div>
+
+        <p style="font-size:13px;color:var(--text-sub);margin-bottom:6px;">
+          你目前的习惯是「早晚清水洗加适乐肤面霜」。我们会在这个基础上，尽量只增加 1 到 2 支精华类产品，保持早上偏极简、晚上偏常规的节奏。
+        </p>
+
+        <h3 style="margin-top:12px;margin-bottom:4px;font-size:14px;">早上 · 防护 + 轻度提亮</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>核心动作/产品</th>
+              <th>与诉求的关系</th>
+              <th>频率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Step 1</td>
+              <td>清水或温和氨基酸洁面一次</td>
+              <td>
+                冬季室内偏干、肤质混干，早上不需要强清洁。清水或温和洁面可以保留部分皮脂，减轻紧绷和干纹，为后续淡斑成分提供更稳定的底盘。
+              </td>
+              <td>每天一次，自由选择清水或洁面</td>
+            </tr>
+            <tr>
+              <td>Step 2</td>
+              <td>淡斑兼修护精华 + 适乐肤润肤乳薄涂</td>
+              <td>
+                精华建议选择含 2 到 5 百分比烟酰胺，叠加传明酸、维 C 衍生物或熊果苷其中一到两种，配合保湿修护成分。先点涂在双颊斑块，
+                再推开到全脸，然后用适乐肤锁住，有利于温和淡斑并保护屏障。
+              </td>
+              <td>前 2 周隔天用，耐受良好后可改为每天</td>
+            </tr>
+            <tr>
+              <td>Step 3</td>
+              <td>广谱防晒 SPF 30–50，PA+++ 或 PA++++</td>
+              <td>
+                黄褐斑对紫外线极敏感。通勤 10 分钟，加上办公室窗边散射光，已经足够让斑加深。充足量防晒是所有淡斑努力能不能成功的开关。
+              </td>
+              <td>每天，出门前 15–30 分钟；中午再次外出前补涂一次</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top:16px;margin-bottom:4px;font-size:14px;">晚上 · 修护为主，淡斑为辅</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>步骤</th>
+              <th>核心动作/产品</th>
+              <th>配方协同与节奏控制</th>
+              <th>频率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Step 1</td>
+              <td>温和洁面，必要时加一步卸妆</td>
+              <td>
+                只有防晒不化妆时，用温和洁面一次即可；若有底妆或厚防晒，则先用卸妆油/乳轻柔按摩并充分乳化，再用氨基酸或无皂基洁面。
+                避免用强清洁和磨砂，以免屏障受损让斑更重。
+              </td>
+              <td>每晚一次，根据彩妆情况决定是否卸妆</td>
+            </tr>
+            <tr>
+              <td>Step 2</td>
+              <td>修护精华为主，淡斑精华隔天叠加</td>
+              <td>
+                先全脸使用修护型精华（神经酰胺、胆固醇、脂肪酸、积雪草、泛醇等），再在双颊和斑块区域叠加与早上相似配方的淡斑精华。
+                前几周淡斑精华控制在每周 3 晚，其余只用修护，观察没有明显刺痛或变红再逐步加频。
+              </td>
+              <td>修护精华每晚；淡斑精华每周 3 晚起步</td>
+            </tr>
+            <tr>
+              <td>Step 3</td>
+              <td>适乐肤润肤乳稍厚涂一层</td>
+              <td>
+                作为封闭保湿层，既锁水又缓冲淡斑成分的刺激。两颊和有斑区域可以略厚，帮助夜间修护，降低炎症后色沉风险。
+              </td>
+              <td>每晚</td>
+            </tr>
+            <tr>
+              <td>Step S · 周护理</td>
+              <td>温和去角质水或 T 区黏土清洁面膜（二选一）</td>
+              <td>
+                聚焦在鼻翼和额头，改善轻度毛孔问题。避开全脸刷酸，只局部少量使用。周护理当晚不要叠加淡斑精华，以免皮肤负担过大。
+              </td>
+              <td>每周 1 次，建议固定在同一天</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="pill-note">
+          如果某天非常累或皮肤状态不佳，可以只做 Step 1 洁面加 Step 3 面霜，
+          把功能性精华整体「放假」一晚，让皮肤先休息。
+        </p>
+      </section>
+
+      <!-- 3. Roadmap -->
+      <section class="section" id="roadmap">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="section-index">3</span>
+            <span>三阶段作战地图 · 修护 → 攻坚 → 维稳</span>
+          </h2>
+          <p class="section-subtitle">
+            不用一次到位，把斑、暗沉和毛孔拆成三个阶段来慢慢推进，必要时随时可以减速或回到前一阶段。
+          </p>
+        </div>
+
+        <table class="phase-table">
+          <thead>
+            <tr>
+              <th>阶段与周期</th>
+              <th>进度与状态</th>
+              <th>核心策略</th>
+              <th>关键动作/成分</th>
+              <th>预期里程碑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Phase 1 · 灭火/修护期（第 1–6 周）</td>
+              <td>
+                <div class="progress-bar">
+                  <div class="progress-inner started"></div>
+                </div>
+                <div style="font-size:11px;color:var(--text-sub);margin-top:4px;">
+                  计划中 · 以稳定为先
+                </div>
+              </td>
+              <td>
+                把皮肤从易受晒、易疲惫状态拉回稳定区：强化防晒习惯，打牢保湿和修护基础，在此基础上温和铺垫淡斑成分。
+              </td>
+              <td>
+                日间适量使用淡斑精华加面霜；晚上以修护精华为主、淡斑精华低频点涂；每周一次 T 区温和去角质。
+              </td>
+              <td>
+                面部紧绷感明显减轻，斑块不再肉眼加深，整体气色比现在更有光泽。只要基本没有刺痛或大面积发红，就可以向 Phase 2 迈进。
+              </td>
+            </tr>
+            <tr>
+              <td>Phase 2 · 攻坚期（第 7–16 周）</td>
+              <td>
+                <div class="progress-bar">
+                  <div class="progress-inner future"></div>
+                </div>
+                <div style="font-size:11px;color:var(--text-sub);margin-top:4px;">
+                  待启动 · 以淡斑和毛孔为主
+                </div>
+              </td>
+              <td>
+                在屏障稳定前提下，有节奏地增强「针对黄褐斑 + 提亮」的力度，同时更认真处理毛孔问题。
+                如无备孕/妊娠且耐受好，可在医生指导下考虑药物级淡斑。
+              </td>
+              <td>
+                提升淡斑精华频率与覆盖范围；精简夜间步骤保持修护；周护理中加入稍强一点的去角质；如医生建议可引入壬二酸、药用淡斑膏等。
+              </td>
+              <td>
+                双颊色斑边界变模糊、颜色变浅约 20–30 百分比；自然光下肤色更均匀，鼻翼毛孔存在感下降。
+                出现干痒或反复红时，可立刻回退到 Phase 1 节奏。
+              </td>
+            </tr>
+            <tr>
+              <td>Phase 3 · 维稳期（第 17 周及以后）</td>
+              <td>
+                <div class="progress-bar">
+                  <div class="progress-inner future"></div>
+                </div>
+                <div style="font-size:11px;color:var(--text-sub);margin-top:4px;">
+                  长期目标 · 精简高价值步骤
+                </div>
+              </td>
+              <td>
+                把对你最有价值的步骤固化成可以长期执行的小习惯：日常防晒、简洁修护、低频淡斑维持，避免频繁更换和过度叠加。
+              </td>
+              <td>
+                继续坚持 SPF 30 以上防晒；晚上保留一支高适配度的淡斑精华每周 3–4 晚；维持每周一次温和去角质；根据季节调整保湿厚度。
+              </td>
+              <td>
+                换季或偶尔熬夜时，肤况也相对稳定，不易突然暗沉或斑明显加重；黄褐斑维持在你可接受甚至略好的水平，
+                毛孔在正常社交距离基本不被注意。需要时可以短期回到 Phase 1 做修护「小假期」。
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="pill-note">
+          如果未来出现「明显皮肤病发作」「刚做完高能量医美」「口服或外用 A 酸反应剧烈」等情况，建议临时进入
+          Phase 0 极简修护模式（只留洁面、修护面霜、物理防晒），并以线下就医为主。
+        </p>
+      </section>
+
+      <!-- 3.5 Lifestyle -->
+      <section class="section" id="lifestyle">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="section-index">3.5</span>
+            <span>生活方式与环境微调 · The Invisible Skincare</span>
+          </h2>
+          <p class="section-subtitle">
+            真正决定上限的，是这部分「看不到」的习惯。这里选出三条对黄褐斑和暗沉影响最大的调整点。
+          </p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>你的定制策略</th>
+              <th>背后逻辑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>饮食</td>
+              <td>
+                每天咖啡控制在一到两杯，并尽量放在下午两点前；晚餐尽量减少重辣重油，尤其减少晚上火锅、烧烤频率；
+                一周至少三天刻意多吃深色蔬菜和富含维 C 的水果。
+              </td>
+              <td>
+                咖啡本身问题不大，但晚喝会影响睡眠节律，进而加重暗沉。高油高辣饮食与体内低度炎症相关，
+                容易加重色沉和痘痘；足量蔬果则提供抗氧化物质，有利于减缓色素生成。
+              </td>
+            </tr>
+            <tr>
+              <td>环境</td>
+              <td>
+                冬季上海空气偏冷干，室内空调会进一步抽湿：在办公室备一支小面霜，觉得紧绷就少量补涂；
+                卧室若很干可以考虑小型加湿器。通勤约十分钟，坚持戴帽檐帽或撑伞，尽量减少脸部直接受风晒。
+              </td>
+              <td>
+                干冷加风吹会削弱角质屏障，让黄褐斑更易被刺激。适度提高环境湿度与表皮脂质水平，可以减少经皮失水，
+                帮助屏障稳定。物理遮挡能显著减少实际接受的紫外线剂量，是防晒霜的好搭档。
+              </td>
+            </tr>
+            <tr>
+              <td>压力与睡眠</td>
+              <td>
+                尝试将固定入睡时间整体提前三十分钟；睡前减少刷手机时间，用十分钟做拉伸或热敷眼睛；
+                失眠明显时，下午后尽量不再喝咖啡。
+              </td>
+              <td>
+                长期压力和睡眠不足会使皮质醇长期偏高，影响皮肤屏障修复和胶原合成，表现为气色差、黄气重、细纹提前出现。
+                改善睡眠对「看起来有没有精神」往往比多一瓶精华更直接。
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 4. Milestone -->
+      <section class="section" id="milestone">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="section-index">4</span>
+            <span>阶段性里程碑打卡 · Milestone Checklist</span>
+          </h2>
+          <p class="section-subtitle">
+            建议对这页截图保存，每到对应周数再回来勾选，比天天盯着镜子更容易看到真实变化。
+          </p>
+        </div>
+
+        <div class="checklist">
+          <div class="check-item">
+            <input type="checkbox" />
+            <div>
+              <strong>短期节点 · 第 2–4 周</strong><br />
+              早上洗脸后不再明显紧绷，晚上涂完面霜后第二天起床皮肤不会干到起皮；
+              黄褐斑暂时不会显著变淡，但肉眼不再加深，整体气色有一点变亮。
+            </div>
+          </div>
+
+          <div class="check-item">
+            <input type="checkbox" />
+            <div>
+              <strong>中期节点 · 第 8–12 周</strong><br />
+              双颊斑块边缘比现在柔和，局部颜色肉眼能看出淡了约五分之一到三分之一（同光线对比照片更明显）；
+              肤色更均匀，黄气减轻，妆面更服帖、不易卡粉；鼻翼毛孔在自然光下存在感下降。
+            </div>
+          </div>
+
+          <div class="check-item">
+            <input type="checkbox" />
+            <div>
+              <strong>长期愿景 · 第 16 周及以后</strong><br />
+              换季或偶尔熬夜时，皮肤状态不会大起大落，色斑不再明显加重；
+              黄褐斑维持在「比现在更淡且基本不再扩散」的状态，整体肤色透亮度提升一个档位，
+              只需少数几支高价值产品和稳定习惯就能长期维持。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Risk -->
+      <section class="section" id="risk">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="section-index">5</span>
+            <span>风险点提示与替代方案</span>
+          </h2>
+          <p class="section-subtitle">
+            有些步骤效果强，但也更挑皮肤状态。下面把潜在高风险环节拆开讲清楚，方便你做知情选择。
+          </p>
+        </div>
+
+        <span class="badge-danger">
+          <span class="dot"></span>
+          功能性成分一旦过量叠加，黄褐斑反黑风险会显著上升
+        </span>
+
+        <div class="risk-title">一、淡斑精华叠加过多、频率过高</div>
+        <p class="risk-text">
+          可能风险：烟酰胺、维 C 衍生物、传明酸单独看都比较温和，但若早晚都用、再叠加酸和频繁去角质，
+          很容易出现刺痛、干痒、局部泛红甚至反黑。
+        </p>
+        <p class="risk-text">
+          适用前提：屏障完整、几乎不敏感、已经稳定使用四到六周且无明显不适。
+        </p>
+        <p class="risk-text">
+          更温和方案：只在晚上使用淡斑精华，早上只做保湿加防晒；或者先从斑块点涂做起，再慢慢铺到双颊。
+        </p>
+        <p class="risk-text">
+          更保守方案：先坚持八周「修护 + 防晒」为主，只在周末晚上点涂淡斑精华，等皮肤非常稳定后再考虑提升频率。
+        </p>
+
+        <div class="risk-title">二、自行上高浓度酸类、视黄醇或药物级淡斑膏</div>
+        <p class="risk-text">
+          可能风险：这类成分淡斑、细化毛孔的能力确实很强，但一旦浓度偏高或使用方法不当，容易出现大面积脱皮、
+          强烈刺痛和炎症后色沉，甚至比现在的斑还重。
+        </p>
+        <p class="risk-text">
+          适用前提：非备孕、非孕期和非哺乳期，有皮肤科医生线下面诊评估，并明确给出用法与疗程。
+        </p>
+        <p class="risk-text">
+          更温和方案：优先使用护肤品级别的多靶点淡斑精华，把「药物淡斑」留给未来需要时与医生一起规划。
+        </p>
+
+        <div class="risk-title">三、周护理去角质或泥膜范围过大、次数过多</div>
+        <p class="risk-text">
+          可能风险：频繁全脸刷酸或全脸黏土面膜，会让混干皮变得更干、更薄，屏障受损后黄褐斑和暗沉都容易加重。
+        </p>
+        <p class="risk-text">
+          更温和方案：仅在 T 区小范围使用，每周最多一次，时间控制在五到十分钟；若近期特别干或失眠严重，可直接跳过去角质步骤。
+        </p>
+
+        <p class="pill-note">
+          对你而言，最重要的不是「尽快上所有强效成分」，而是用皮肤可以长期接受的强度，持续不断地防晒、修护和温和淡斑。
+          这样反而更快、更稳地靠近你想要的状态。
+        </p>
+      </section>
+
+      <!-- 6. Clinic -->
+      <section class="section" id="clinic">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="section-index">6</span>
+            <span>进阶医美与专业治疗 · 可选路线</span>
+          </h2>
+          <p class="section-subtitle">
+            以下内容只适合在你有意愿、有预算，并且已经线下咨询皮肤科医生之后再考虑，不是必须项。
+          </p>
+        </div>
+
+        <p style="font-size:13px;color:var(--text-sub);margin-bottom:6px;">
+          如果未来希望在黄褐斑上获得更明显的淡化、对长期维护也有一定预算，可以和医生讨论以下方向：
+        </p>
+
+        <ul class="list">
+          <li>
+            药物治疗方向：口服或外用传明酸、含 A 酸或对苯二酚的淡斑药膏等，尤其需要医生评估是否有生育计划与基础疾病。
+          </li>
+          <li>
+            光电方向：低能量调 Q 激光、光子嫩肤等，多次小剂量疗程常见，但亚洲肤质存在一定反黑风险，需严格防晒和按医嘱护理。
+          </li>
+        </ul>
+
+        <p class="pill-note">
+          无论是哪种医美或药物淡斑，前后一到两周都建议进入「极简护肤模式」：停用所有酸类、视黄醇和非必要淡斑精华，
+          只保留温和洁面、修护面霜和高强度防晒，具体停用时间要以医生嘱咐为准。
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer risk note -->
+    <footer class="footer">
+      <p style="margin-bottom:6px;">
+        <strong>重要安全提示</strong>
+      </p>
+      <p>
+        我无法进行医学级别诊断，也不能替代线下皮肤科医生或正规医疗机构的判断与治疗。如果出现以下任一情况，更建议优先就医或使用正规线上问诊：
+      </p>
+      <ul class="list">
+        <li>面部突然大面积爆痘、糜烂或渗液。</li>
+        <li>使用某个产品后，持续数日明显红、痒、肿、灼热或疼痛。</li>
+        <li>长期反复的中重度痤疮，或怀疑为玫瑰痤疮、严重湿疹、皮炎等。</li>
+        <li>孕期、哺乳期、备孕中，或正在使用口服/外用药物（尤其是 A 酸类）且对安全性不确定。</li>
+      </ul>
+      <p style="margin-top:8px;">
+        从今天开始，你已经给了皮肤一个更「科学且可长期坚持」的起点。
+        后续任何环节不确定、难坚持，都可以再根据这版结构继续精简或升级。
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
